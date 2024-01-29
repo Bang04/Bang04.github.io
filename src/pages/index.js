@@ -20,13 +20,12 @@ const BlogIndex = ({ data, location }) => {
 
   const categories = data.allMarkdownRemark.categoryList
   const tags = data.allMarkdownRemark.group;
-
   
   if (posts.length === 0) {
     return (
       <Layout location={location} title={siteTitle}>
         <Bio />
-        <p>ç
+        <p>
           No blog posts found. Add markdown posts to "content/blog" (or the
           directory you specified for the "gatsby-source-filesystem" plugin in
           gatsby-config.js).
@@ -38,11 +37,9 @@ const BlogIndex = ({ data, location }) => {
     <Layout location={location} title={siteTitle}  onChangeCat={filterCatHandler}>
       <Bio />
       <Tags tags={tags} />
-
       <ol style={{ listStyle: `none` }}>
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug
-
           return (
             <li key={post.fields.slug}>
               <article
