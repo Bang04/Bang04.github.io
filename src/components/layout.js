@@ -9,8 +9,10 @@ const ListLink = props => (
 )
 
 const Layout = ({ location, title, children  }) => {
+
+  //alert(JSON.stringify(location ));
   const rootPath = `${__PATH_PREFIX__}/`
-  const isRootPath = location?.pathname === rootPath
+  const isRootPath = location.pathname === rootPath
   let header 
   
   if (isRootPath) {
@@ -29,10 +31,10 @@ const Layout = ({ location, title, children  }) => {
   }
 
   return (
-    <div className="global-wrapper" data-is-root-path={isRootPath}>
+    <div class="container" className="global-wrapper" data-is-root-path={isRootPath}>
        <Helmet title={title} />
-      <nav>
-        <ul style={{ listStyle: `none`, float: `right` }}>
+      <nav class="breadcrumb">
+        <ul>
           <ListLink to="/about">About</ListLink>
           <ListLink to="/blog">blog</ListLink>
         </ul>
@@ -40,7 +42,7 @@ const Layout = ({ location, title, children  }) => {
       <header className="global-header">{header}</header>
      
       <main>{children}</main>
-      <footer>
+      <footer class="footer">
         © {new Date().getFullYear()}, Built with
         {` `}
         <a href="https://www.gatsbyjs.com">Gatsby</a>

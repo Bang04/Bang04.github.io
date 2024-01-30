@@ -1,5 +1,5 @@
 ---
-slug: "/blog/java-infomation-post1"
+slug: "java-infomation-post1"
 title: My Second Post!
 date: "2024-01-02T23:46:37.121Z"
 category: "New" 

@@ -6,7 +6,7 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 
 const BlogPostTemplate = ({
-  data: { previous, next, site, markdownRemark: post, location,  
+  data: { previous, next, site, markdownRemark: post, location = "",  
   },
 
 }) => {
@@ -14,6 +14,7 @@ const BlogPostTemplate = ({
 
   return (
     <Layout location={location} title={siteTitle}>
+        {/* <Layout location={`/blog/`} title={siteTitle}></Layout> */}
     <article
         className="blog-post"
         itemScope

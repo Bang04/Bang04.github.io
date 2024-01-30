@@ -1,25 +1,25 @@
 import React from "react"
-import PropTypes from "prop-types"
 
-// Utilities
+import { Link, graphql } from "gatsby"
+import PropTypes from "prop-types"
 import kebabCase from "lodash/kebabCase"
 
-// Components
-import { Link, graphql } from "gatsby"
-
+// 포스팅의 하단 태그 목록
 const TagsPage = ({ tags }) => (
 
   <div>
     <div>
-      <h1>Tags</h1>
-      <ul>
+      <ul class="tags">
         {tags.map(tag => (
-          <li key={tag.fieldValue}>
+          <li class="tag is-medium" key={tag.fieldValue}>
             <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
               {tag.fieldValue} ({tag.totalCount})
             </Link>
           </li>
         ))}
+        <li class="tag is-medium">
+        <Link to="/tags">All tags</Link>
+        </li>
       </ul>
     </div>
   </div>

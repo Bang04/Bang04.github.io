@@ -1,5 +1,5 @@
 ---
-slug: "/blog/java-infomation-post2"
+slug: "java-infomation-post2"
 title: Hello World
 date: "2024-01-02T22:12:03.284Z"
 description: "Hello World"

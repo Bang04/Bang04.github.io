@@ -1,6 +1,7 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
 import { useState } from "react"
+import 'bulma/css/bulma.min.css';
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
@@ -9,6 +10,7 @@ import Tags from "../pages/tags"
 
 
 const BlogIndex = ({ data, location }) => {
+
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
 
@@ -36,27 +38,27 @@ const BlogIndex = ({ data, location }) => {
   return (
     <Layout location={location} title={siteTitle}  onChangeCat={filterCatHandler}>
       <Bio />
-      <Tags tags={tags} />
-      <ol style={{ listStyle: `none` }}>
+      <section class="section">
+        <Tags tags={tags} />
+      </section>
+
+      <section class="section is-medium">
+      <ol  style={{ listStyle: `none` }}>
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug
           return (
-            <li key={post.fields.slug}>
-              <article
-                className="post-list-item"
-                itemScope
-                itemType="http://schema.org/Article"
-              >
+            <li class="card" key={post.fields.slug}>
+              <article class="card-content">
                 <header>
-                  <h2>
+                  <div class="title">
                     <Link to={post.fields.slug} itemProp="url">
                       <span itemProp="headline">{title}</span>
                     </Link>
-                  </h2>
+                  </div>
                   <small>{post.frontmatter.date}</small>
                 </header>
                 <section>
-                  <p
+                  <p class="subtitle is-6"
                     dangerouslySetInnerHTML={{
                       __html: post.frontmatter.description || post.excerpt,
                     }}
@@ -68,6 +70,8 @@ const BlogIndex = ({ data, location }) => {
           )
         })}
       </ol>
+      </section >
+     
     </Layout>
   )
 }
