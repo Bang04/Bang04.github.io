@@ -11,7 +11,6 @@ const BlogPostTemplate = ({
 
 }) => {
   const siteTitle = site.siteMetadata?.title || `Title`
-
   return (
     <Layout location={location} title={siteTitle}>
         {/* <Layout location={`/blog/`} title={siteTitle}></Layout> */}

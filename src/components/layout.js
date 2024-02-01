@@ -14,7 +14,6 @@ const Layout = ({ location, title, children  }) => {
   const rootPath = `${__PATH_PREFIX__}/`
   const isRootPath = location.pathname === rootPath
   let header 
-  
   if (isRootPath) {
     
     header = (
@@ -32,14 +31,18 @@ const Layout = ({ location, title, children  }) => {
 
   return (
     <div class="container" className="global-wrapper" data-is-root-path={isRootPath}>
-       <Helmet title={title} />
-      <nav class="breadcrumb">
-        <ul>
-          <ListLink to="/about">About</ListLink>
-          <ListLink to="/blog">blog</ListLink>
-        </ul>
+
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <header className="global-header">{header}</header>
+        <div class="navbar-menu">
+          <div class="navbar-end">
+            <ul>
+              <ListLink to="/about" class="navbar-item">About</ListLink>
+              <ListLink to="/blog" class="navbar-item">blog</ListLink>
+            </ul>
+          </div>
+        </div>
       </nav>
-      <header className="global-header">{header}</header>
      
       <main>{children}</main>
       <footer class="footer">

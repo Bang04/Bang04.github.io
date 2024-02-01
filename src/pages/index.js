@@ -42,7 +42,7 @@ const BlogIndex = ({ data, location }) => {
         <Tags tags={tags} />
       </section>
 
-      <section class="section is-medium">
+      <section class="section">
       <ol  style={{ listStyle: `none` }}>
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug

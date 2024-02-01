@@ -5,8 +5,11 @@ import PropTypes from "prop-types"
 import { Link, graphql } from "gatsby"
 
 const Tags = ({ pageContext, data }) => {
+
   const { tag } = pageContext
   const { edges, totalCount } = data.allMarkdownRemark
+
+  console.log("tags tem "+ tag);
 
   const tagHeader = `${totalCount} post${
     totalCount === 1 ? "" : "s"
@@ -16,12 +19,29 @@ const Tags = ({ pageContext, data }) => {
     <div>
       <h1>{tagHeader}</h1>
       <ul>
-        {edges.map(({ node }) => {
-          const { tag } = node.fields
-          const { title } = node.frontmatter
+        {edges.map(({ post }) => {
+          const { tag } = post.fields
+          const { title } = post.frontmatter
           return (
-            <li key={tag}>
-              <Link to={tag}>{title}</Link>
+            <li class="card" key={post.fields.slug}>
+              <article class="card-content">
+                <header>
+                  <div class="title">
+                    <Link to={post.fields.slug} itemProp="url">
+                      <span itemProp="headline">{title}</span>
+                    </Link>
+                  </div>
+                  <small>{post.frontmatter.date}</small>
+                </header>
+                <section>
+                  <p class="subtitle is-6"
+                    dangerouslySetInnerHTML={{
+                      __html: post.frontmatter.description || post.excerpt,
+                    }}
+                    itemProp="description"
+                  />
+                </section>
+              </article>
             </li>
           )
         })}
@@ -71,7 +91,11 @@ export const pageQuery = graphql`
             slug
           }
           frontmatter {
+            category
+            tags
             title
+            description
+            date(formatString: "MMMM DD, YYYY")
           }
         }
       }

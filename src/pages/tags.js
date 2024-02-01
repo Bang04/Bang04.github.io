@@ -6,22 +6,19 @@ import kebabCase from "lodash/kebabCase"
 
 // 포스팅의 하단 태그 목록
 const TagsPage = ({ tags }) => (
-
   <div>
-    <div>
-      <ul class="tags">
+    <ul class="tags">
         {tags.map(tag => (
-          <li class="tag is-medium" key={tag.fieldValue}>
+          <li class="tag" key={tag.fieldValue}>
             <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
               {tag.fieldValue} ({tag.totalCount})
             </Link>
           </li>
         ))}
-        <li class="tag is-medium">
-        <Link to="/tags">All tags</Link>
+        <li class="tag">
+          <Link to="/tags">All tags</Link>
         </li>
-      </ul>
-    </div>
+    </ul>
   </div>
 )
 
