@@ -1,15 +1,16 @@
-import React from "react"
+import * as React from "react"
+import { Link, graphql } from "gatsby"
 import PropTypes from "prop-types"
 
-// 특정 태그의 포스팅 목록 페이지
-import { Link, graphql } from "gatsby"
 
-const Tags = ({ pageContext, data }) => {
+const tagTemplate = ({ pageContext, data }) => {
+  const { tag } = pageContext.tag;
+  
+  //const { edges, totalCount } = data.allMarkdownRemark
+  const posts = data.allMarkdownRemark.nodes
+  const totalCount =  data.allMarkdownRemark.totalCount
 
-  const { tag } = pageContext
-  const { edges, totalCount } = data.allMarkdownRemark
-
-  console.log("tags tem "+ tag);
+console.log("tags templates "+ tag);
 
   const tagHeader = `${totalCount} post${
     totalCount === 1 ? "" : "s"
@@ -19,7 +20,7 @@ const Tags = ({ pageContext, data }) => {
     <div>
       <h1>{tagHeader}</h1>
       <ul>
-        {edges.map(({ post }) => {
+        {posts.map(({ post }) => {
           const { tag } = post.fields
           const { title } = post.frontmatter
           return (
@@ -47,7 +48,6 @@ const Tags = ({ pageContext, data }) => {
         })}
       </ul>
       <Link to="/tags">All tags</Link>
-
     </div>
   )
 }
@@ -75,7 +75,7 @@ Tags.propTypes = {
   }),
 }
 
-export default Tags
+export default tagTemplate
 
 export const pageQuery = graphql`
   query($tag: String) {
@@ -83,10 +83,9 @@ export const pageQuery = graphql`
       limit: 2000
       sort: { fields: {slug: DESC}}
       filter: { frontmatter: { tags: { in: [$tag] } } }
-    ) {
+    ){
       totalCount
-      edges {
-        node {
+       nodes {
           fields {
             slug
           }
@@ -98,7 +97,6 @@ export const pageQuery = graphql`
             date(formatString: "MMMM DD, YYYY")
           }
         }
-      }
     }
   }
 `

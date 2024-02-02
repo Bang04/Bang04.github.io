@@ -8,7 +8,7 @@
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
-// Define the template for blog post
+// template
 const blogPost = path.resolve(`src/templates/post-details.js`)
 const tagTemplate = path.resolve("src/templates/tags.js")
 
@@ -18,7 +18,6 @@ const tagTemplate = path.resolve("src/templates/tags.js")
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
-  // Get all markdown blog posts sorted by date
   const result = await graphql(`
     {
       allMarkdownRemark(
@@ -38,7 +37,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       tagsGroup: allMarkdownRemark(limit: 2000) {
         group(field: { frontmatter: { tags: SELECT }}) {
           fieldValue
-          totalCount
         }
       }
     }
@@ -70,20 +68,34 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       })
     })
 
-    // Extract tag data from query
-    const tags = result.data.tagsGroup.group
-
-    // Make tag pages
-    tags.forEach(tag => {
-      createPage({
-        path: `/tags/${_.kebabCase(tag.fieldValue)}/`,
-        component: tagTemplate,
-        context: {
-          tag: tag.fieldValue,
-        },
-      })
-    })
   }
+
+  // const tagResult = await graphql(`
+  //   query {
+  //     allMarkdownRemark {
+  //       edges {
+  //         node {
+  //           frontmatter {
+  //             tags
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // `);
+  const tags = result.data.tagsGroup.group
+  console.log(tags);
+  // tagResult.data.allMarkdownRemark.edges.forEach(({ node }) => {
+  //   node.frontmatter.tags.forEach(tag => {
+   tags.forEach(tag => {
+    createPage({
+      path: `/tags/${_.kebabCase(tag.fieldValue)}/`,
+      component: tagTemplate,
+      context: {
+        tag: tag.fieldValue,
+      },
+    })
+  })
 }
 
 /**
