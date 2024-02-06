@@ -1,14 +1,26 @@
 import React from "react"
-
-import { Link, graphql } from "gatsby"
 import PropTypes from "prop-types"
+
+// Utilities
 import kebabCase from "lodash/kebabCase"
 
-// 포스팅의 하단 태그 목록
-const TagsPage = ({ tags }) => (
+// Components
+// import { Helmet } from "react-helmet"
+import { Link, graphql } from "gatsby"
+
+// 태그 목록 페이지: 
+// const TagsPage = ({tags}) => (
+  const TagsPage = ({
+    data: {
+      allMarkdownRemark: { group },
+      site: {
+        siteMetadata: { title },
+      },
+    },
+  })  => (
   <div>
     <ul class="tags">
-        {tags.map(tag => (
+        {group.map(tag => (
           <li class="tag" key={tag.fieldValue}>
             <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
               {tag.fieldValue} ({tag.totalCount})

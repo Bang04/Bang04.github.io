@@ -10,7 +10,7 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 
 // template
 const blogPost = path.resolve(`src/templates/post-details.js`)
-const tagTemplate = path.resolve("src/templates/tags.js")
+const tagTemplate = path.resolve("./src/templates/tags.js")
 
 /**
  * @type {import('gatsby').GatsbyNode['createPages']}
@@ -70,23 +70,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   }
 
-  // const tagResult = await graphql(`
-  //   query {
-  //     allMarkdownRemark {
-  //       edges {
-  //         node {
-  //           frontmatter {
-  //             tags
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // `);
+
   const tags = result.data.tagsGroup.group
-  console.log(tags);
-  // tagResult.data.allMarkdownRemark.edges.forEach(({ node }) => {
-  //   node.frontmatter.tags.forEach(tag => {
+  
    tags.forEach(tag => {
     createPage({
       path: `/tags/${_.kebabCase(tag.fieldValue)}/`,

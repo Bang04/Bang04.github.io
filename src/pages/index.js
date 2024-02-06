@@ -39,7 +39,7 @@ const BlogIndex = ({ data, location }) => {
     <Layout location={location} title={siteTitle}  onChangeCat={filterCatHandler}>
       <Bio />
       <section class="section">
-        <Tags tags={tags} />
+        <Tags data = {data}/>
       </section>
 
       <section class="section">

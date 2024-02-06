@@ -2,15 +2,16 @@ import * as React from "react"
 import { Link, graphql } from "gatsby"
 import PropTypes from "prop-types"
 
+//특정 태그의 포스팅 목록 페이지:
 
-const tagTemplate = ({ pageContext, data }) => {
-  const { tag } = pageContext.tag;
-  
-  //const { edges, totalCount } = data.allMarkdownRemark
+const Tags = ({ pageContext, data }) => {
+  //const { tag } = pageContext.tag;
+  const { tag } = pageContext;
+
+  console.log("tag : "+tag);
+  const { edges, totalCount } = data.allMarkdownRemark
   const posts = data.allMarkdownRemark.nodes
-  const totalCount =  data.allMarkdownRemark.totalCount
-
-console.log("tags templates "+ tag);
+  //const totalCount =  data.allMarkdownRemark.totalCount
 
   const tagHeader = `${totalCount} post${
     totalCount === 1 ? "" : "s"
@@ -20,7 +21,7 @@ console.log("tags templates "+ tag);
     <div>
       <h1>{tagHeader}</h1>
       <ul>
-        {posts.map(({ post }) => {
+        {edges.map(({ post }) => {
           const { tag } = post.fields
           const { title } = post.frontmatter
           return (
@@ -75,7 +76,7 @@ Tags.propTypes = {
   }),
 }
 
-export default tagTemplate
+export default Tags
 
 export const pageQuery = graphql`
   query($tag: String) {
