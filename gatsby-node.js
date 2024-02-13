@@ -7,6 +7,7 @@
 
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
+const kebabCase = require(`lodash.kebabcase`)
 
 // template
 const blogPost = path.resolve(`src/templates/post-details.js`)

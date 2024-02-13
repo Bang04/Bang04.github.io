@@ -9,10 +9,11 @@ import Seo from "../components/seo"
 import Tags from "../pages/tags"
 
 
-const BlogIndex = ({ data, location }) => {
+const BlogIndex = ({ data, location, pageContext }) => {
 
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
+  const { tag } = pageContext 
 
   const [filteredCat, setFilteredCat] = useState("All")
 
@@ -38,9 +39,7 @@ const BlogIndex = ({ data, location }) => {
   return (
     <Layout location={location} title={siteTitle}  onChangeCat={filterCatHandler}>
       <Bio />
-      <section class="section">
-        <Tags data = {data}/>
-      </section>
+      <Tags tags = {tags}/>
 
       <section class="section">
       <ol  style={{ listStyle: `none` }}>

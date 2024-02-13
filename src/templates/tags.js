@@ -7,7 +7,7 @@ import PropTypes from "prop-types"
 const Tags = ({ pageContext, data }) => {
   //const { tag } = pageContext.tag;
   const { tag } = pageContext;
-
+console.log("tag"+ tag);
   console.log("tag : "+tag);
   const { edges, totalCount } = data.allMarkdownRemark
   const posts = data.allMarkdownRemark.nodes
@@ -83,7 +83,7 @@ export const pageQuery = graphql`
     allMarkdownRemark(
       limit: 2000
       sort: { fields: {slug: DESC}}
-      filter: { frontmatter: { tags: { in: [$tag] } } }
+      filter: { frontmatter: { tags: { eq: $tag } } }
     ){
       totalCount
        nodes {

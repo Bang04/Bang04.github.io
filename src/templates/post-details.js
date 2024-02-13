@@ -4,6 +4,7 @@ import { Link, graphql } from "gatsby"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import Tags from "../pages/tags" 
 
 const BlogPostTemplate = ({
   data: { previous, next, site, markdownRemark: post, location = "",  

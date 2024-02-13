@@ -9,19 +9,11 @@ import kebabCase from "lodash/kebabCase"
 import { Link, graphql } from "gatsby"
 
 // 태그 목록 페이지: 
-// const TagsPage = ({tags}) => (
-  const TagsPage = ({
-    data: {
-      allMarkdownRemark: { group },
-      site: {
-        siteMetadata: { title },
-      },
-    },
-  })  => (
+ const TagsPage = ({tags}) => (
   <div>
     <ul class="tags">
-        {group.map(tag => (
-          <li class="tag" key={tag.fieldValue}>
+        {tags.map(tag => (
+          <li class="tag" key={kebabCase(tag.fieldValue)}>
             <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
               {tag.fieldValue} ({tag.totalCount})
             </Link>
@@ -53,19 +45,3 @@ TagsPage.propTypes = {
 }
 
 export default TagsPage
-
-export const pageQuery = graphql`
-    query {
-        site {
-            siteMetadata {
-            title
-            }
-        }
-        allMarkdownRemark(limit: 2000) {
-            group(field: { frontmatter: { tags: SELECT }}) {
-            fieldValue
-            totalCount
-            }
-        }
-    }
-`
