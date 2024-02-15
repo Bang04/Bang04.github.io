@@ -57,7 +57,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     posts.forEach((post, index) => {
       const previousPostId = index === 0 ? null : posts[index - 1].id
       const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id;
-      console.log(post);
       createPage({
         path: post.fields.slug,
         component: blogPost,
@@ -72,17 +71,23 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }
 
 
-  const tags = result.data.tagsGroup.group
+  const tags = result.data.tagsGroup.group;
+  console.log("========test=========")
+  console.log(tags);
+  console.log("========test=========")
   
    tags.forEach(tag => {
+    console.log("========test222=========")
+    console.log( `/tags/${kebabCase(tag.fieldValue)}/`);
+    console.log("========test222=========")
     createPage({
-      path: `/tags/${_.kebabCase(tag.fieldValue)}/`,
+      path: `/tags/${kebabCase(tag.fieldValue)}/`,
       component: tagTemplate,
       context: {
         tag: tag.fieldValue,
       },
     })
-  })
+  });
 }
 
 /**

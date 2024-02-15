@@ -21,7 +21,7 @@ console.log("tag"+ tag);
     <div>
       <h1>{tagHeader}</h1>
       <ul>
-        {edges.map(({ post }) => {
+        {edges?.map(({ post }) => {
           const { tag } = post.fields
           const { title } = post.frontmatter
           return (

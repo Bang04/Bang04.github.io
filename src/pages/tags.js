@@ -12,7 +12,7 @@ import { Link, graphql } from "gatsby"
  const TagsPage = ({tags}) => (
   <div>
     <ul class="tags">
-        {tags.map(tag => (
+        {tags?.map(tag => (
           <li class="tag" key={kebabCase(tag.fieldValue)}>
             <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
               {tag.fieldValue} ({tag.totalCount})
