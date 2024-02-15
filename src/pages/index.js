@@ -7,6 +7,7 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Tags from "../pages/tags"
+import PostsList from "../components/post/list";
 
 
 const BlogIndex = ({ data, location, pageContext }) => {
@@ -46,6 +47,7 @@ const BlogIndex = ({ data, location, pageContext }) => {
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug
           return (
+            // <PostsList posts={posts} />
             <li class="card" key={post.fields.slug}>
               <article class="card-content">
                 <header>
