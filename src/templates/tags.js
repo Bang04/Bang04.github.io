@@ -4,30 +4,52 @@ import Bio from "../components/bio"
 import Seo from "../components/seo"
 import PropTypes from "prop-types"
 import Layout from "../components/layout"
-import PostList from "../components/post/list"
+import Tags from "../pages/tags"
+const TagTemplate = ({ pageContext, data }) => {
 
-const Tags = ({ pageContext, data }) => {
-
-  const { tag } = pageContext
-
-  const { edges, totalCount } = data.allMarkdownRemark
+  const {tag }   = pageContext
   const posts = data.allMarkdownRemark.nodes
-  //const totalCount =  data.allMarkdownRemark.totalCount
-  console.log(posts);
+  const tags = data.allMarkdownRemark.group;
+
   return (
     <Layout location={``} title={``}>
-       <Bio />
-         <Tags tags = {tag}/>
+      <Bio />
+      <Tags tags = {tags} curTag = {tag}/>
           <section class="section">
             <ol  style={{ listStyle: `none` }}>
-              <PostList posts ={posts}/>
+            {posts.map(post => {
+          const title = post.frontmatter.title || post.fields.slug
+          return (
+            // <PostsList posts={posts} />
+            <li class="card" key={post.fields.slug}>
+              <article class="card-content">
+                <header>
+                  <div class="title">
+                    <Link to={post.fields.slug} itemProp="url">
+                      <span itemProp="headline">{title}</span>
+                    </Link>
+                  </div>
+                  <small>{post.frontmatter.date}</small>
+                </header>
+                <section>
+                  <p class="subtitle is-6"
+                    dangerouslySetInnerHTML={{
+                      __html: post.frontmatter.description || post.excerpt,
+                    }}
+                    itemProp="description"
+                  />
+                </section>
+              </article>
+            </li>
+          )
+        })}
             </ol>
           </section>
     </Layout>
   )
 }
 
-Tags.propTypes = {
+TagTemplate.propTypes = {
   pageContext: PropTypes.shape({
     tag: PropTypes.string.isRequired,
   }),
@@ -50,7 +72,7 @@ Tags.propTypes = {
   }),
 }
 
-export default Tags
+export default TagTemplate
 
 export const pageQuery = graphql`
   query($tag: String) {
@@ -59,8 +81,12 @@ export const pageQuery = graphql`
       sort: { fields: {slug: DESC}}
       filter: { frontmatter: { tags: { eq: $tag } } }
     ){
-      totalCount
+      group(field: { frontmatter: { tags: SELECT }}) {
+        fieldValue
+        totalCount
+        }
        nodes {
+         excerpt
           fields {
             slug
           }

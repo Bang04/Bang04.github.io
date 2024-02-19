@@ -24,7 +24,7 @@ const BlogIndex = ({ data, location, pageContext }) => {
 
   const categories = data.allMarkdownRemark.categoryList
   const tags = data.allMarkdownRemark.group;
-  
+  console.log(posts);
   if (posts.length === 0) {
     return (
       <Layout location={location} title={siteTitle}>
@@ -40,7 +40,7 @@ const BlogIndex = ({ data, location, pageContext }) => {
   return (
     <Layout location={location} title={siteTitle}  onChangeCat={filterCatHandler}>
       <Bio />
-      <Tags tags = {tags}/>
+      <Tags tags = {tags} curTag = {''}/>
 
       <section class="section">
       <ol  style={{ listStyle: `none` }}>

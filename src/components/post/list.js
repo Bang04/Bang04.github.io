@@ -4,9 +4,10 @@ import { Link } from "gatsby"
 import 'bulma/css/bulma.min.css';
 
 const PostsList = ( {posts} ) =>{
-
+  console.log(posts);
     return posts.map((post ) => {
         <li class="card">
+          <div>{post.frontmatter.title}</div>
             <article class="card-content">
               <header>
                 <div class="title">

@@ -3,26 +3,24 @@ import PropTypes from "prop-types"
 
 // Utilities
 import kebabCase from "lodash/kebabCase"
+import 'bulma/css/bulma.min.css';
 
 // Components
 // import { Helmet } from "react-helmet"
 import { Link, graphql } from "gatsby"
 
 // 태그 목록 페이지: 
- const TagsPage = ({tags}) => (
-  <div>
-    <ul class="tags">
-        {tags?.map(tag => (
-          <li class="tag" key={kebabCase(tag.fieldValue)}>
+ const TagsPage = ({tags, curTag }) => (
+  <div class="tags are-medium">
+    {tags?.map(tag => (
+        
+          <span class={kebabCase(tag.fieldValue) === kebabCase(curTag)? "tag is-success" : "tag"}  key={kebabCase(tag.fieldValue)}>
             <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
               {tag.fieldValue} ({tag.totalCount})
             </Link>
-          </li>
+          </span>
+          
         ))}
-        <li class="tag">
-          <Link to="/tags">All tags</Link>
-        </li>
-    </ul>
   </div>
 )
 
