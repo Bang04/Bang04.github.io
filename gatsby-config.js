@@ -118,7 +118,7 @@ module.exports = {
         start_url: `/`,
         background_color: `#ffffff`,
         display: `minimal-ui`,
-        icon: ``, 
+        icon: `src/images/pubao_pro.png`, 
       },
     },
   ],

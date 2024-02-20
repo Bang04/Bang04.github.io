@@ -7,6 +7,7 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Tags from "../pages/tags"
+import Categoris from "../pages/categories"
 import PostsList from "../components/post/list";
 
 
@@ -14,6 +15,7 @@ const BlogIndex = ({ data, location, pageContext }) => {
 
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
+
   const { tag } = pageContext 
 
   const [filteredCat, setFilteredCat] = useState("All")
@@ -24,6 +26,7 @@ const BlogIndex = ({ data, location, pageContext }) => {
 
   const categories = data.allMarkdownRemark.categoryList
   const tags = data.allMarkdownRemark.group;
+  
   console.log(posts);
   if (posts.length === 0) {
     return (
@@ -40,6 +43,7 @@ const BlogIndex = ({ data, location, pageContext }) => {
   return (
     <Layout location={location} title={siteTitle}  onChangeCat={filterCatHandler}>
       <Bio />
+      <Categoris categories ={ categories }/>
       <Tags tags = {tags} curTag = {''}/>
 
       <section class="section">
@@ -113,6 +117,7 @@ query {
          
         }
       }
+      categoryList:  distinct(field: {frontmatter: {category: SELECT}})
      
     }
   }

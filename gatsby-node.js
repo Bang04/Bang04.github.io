@@ -11,6 +11,7 @@ const kebabCase = require(`lodash.kebabcase`)
 
 // template
 const blogPost = path.resolve(`src/templates/post-details.js`)
+const categoriesTemplate = path.resolve("src/templates/categoris.js");
 const tagTemplate = path.resolve("./src/templates/tags.js")
 
 /**
@@ -70,7 +71,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   }
 
-
+  /* Tag */
   const tags = result.data.tagsGroup.group;
 
    tags.forEach(tag => {
@@ -82,6 +83,19 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       },
     })
   });
+
+  /* Categories */
+  const categories = result.data.allMarkdownRemark.categoryList
+
+  categories.forEach(category => {
+    createPage({
+      path: `/categories/${_.kebabCase(category)}/`,
+      component: categoriesTemplate,
+      context: {
+        category: category,
+      },
+    })
+  })
 }
 
 /**

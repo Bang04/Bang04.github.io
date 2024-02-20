@@ -18,30 +18,30 @@ const TagTemplate = ({ pageContext, data }) => {
           <section class="section">
             <ol  style={{ listStyle: `none` }}>
             {posts.map(post => {
-          const title = post.frontmatter.title || post.fields.slug
-          return (
-            // <PostsList posts={posts} />
-            <li class="card" key={post.fields.slug}>
-              <article class="card-content">
-                <header>
-                  <div class="title">
-                    <Link to={post.fields.slug} itemProp="url">
-                      <span itemProp="headline">{title}</span>
-                    </Link>
-                  </div>
-                  <small>{post.frontmatter.date}</small>
-                </header>
-                <section>
-                  <p class="subtitle is-6"
-                    dangerouslySetInnerHTML={{
-                      __html: post.frontmatter.description || post.excerpt,
-                    }}
-                    itemProp="description"
-                  />
-                </section>
-              </article>
-            </li>
-          )
+                const title = post.frontmatter.title || post.fields.slug
+                return (
+                  // <PostsList posts={posts} />
+                  <li class="card" key={post.fields.slug}>
+                    <article class="card-content">
+                      <header>
+                        <div class="title">
+                          <Link to={post.fields.slug} itemProp="url">
+                            <span itemProp="headline">{title}</span>
+                          </Link>
+                        </div>
+                        <small>{post.frontmatter.date}</small>
+                      </header>
+                      <section>
+                        <p class="subtitle is-6"
+                          dangerouslySetInnerHTML={{
+                            __html: post.frontmatter.description || post.excerpt,
+                          }}
+                          itemProp="description"
+                        />
+                      </section>
+                    </article>
+                  </li>
+                )
         })}
             </ol>
           </section>

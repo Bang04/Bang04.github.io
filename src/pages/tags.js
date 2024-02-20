@@ -11,7 +11,13 @@ import { Link, graphql } from "gatsby"
 
 // 태그 목록 페이지: 
  const TagsPage = ({tags, curTag }) => (
+  
   <div class="tags are-medium">
+    <span class="tag">
+      <Link to="/">
+        All
+      </Link>
+    </span>
     {tags?.map(tag => (
         
           <span class={kebabCase(tag.fieldValue) === kebabCase(curTag)? "tag is-success" : "tag"}  key={kebabCase(tag.fieldValue)}>
