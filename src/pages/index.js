@@ -15,19 +15,16 @@ const BlogIndex = ({ data, location, pageContext }) => {
 
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
-
+  const categories = data.allMarkdownRemark.categoryList
+  const tags = data.allMarkdownRemark.group;
   const { tag } = pageContext 
-
   const [filteredCat, setFilteredCat] = useState("All")
 
   const filterCatHandler = selected => {
     setFilteredCat(selected)
   }
 
-  const categories = data.allMarkdownRemark.categoryList
-  const tags = data.allMarkdownRemark.group;
-  
-  console.log(posts);
+
   if (posts.length === 0) {
     return (
       <Layout location={location} title={siteTitle}>

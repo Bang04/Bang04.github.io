@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "gatsby";
+import kebabCase from "lodash/kebabCase"
 
 const Categories = ({ categories }) => {
 
@@ -8,7 +10,7 @@ const Categories = ({ categories }) => {
                 categories
             </p>
              <ul class="menu-list">
-             {categories.map(category => (
+             {categories?.map(category => (
                      <li>
                         <Link to={`/categories/${kebabCase(category)}/`}>
                             { category }
@@ -23,12 +25,31 @@ const Categories = ({ categories }) => {
     )
 }
 
-// export const pageQuery = graphql`
-// query CategoryQuery {
-//     allMarkdownRemark(sort: {frontmatter: {category: DESC}}) {
-//         categoryList:  distinct(field: {frontmatter: {category: SELECT}})
-//     }
-    
-// }
-//`
 export default Categories
+
+export const pageQuery = graphql`
+  query Category($category: String) {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+    allMarkdownRemark(
+      limit: 2000
+      sort: { fields: {slug: DESC}}
+      filter: { frontmatter: { category: { in: [$category] } } }
+    ) {
+      totalCount
+      edges {
+        node {
+          fields {
+            slug
+          }
+          frontmatter {
+            title
+          }
+        }
+      }
+    }
+  }
+`

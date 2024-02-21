@@ -7,18 +7,19 @@
 
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
-const kebabCase = require(`lodash.kebabcase`)
-
-// template
-const blogPost = path.resolve(`src/templates/post-details.js`)
-const categoriesTemplate = path.resolve("src/templates/categoris.js");
-const tagTemplate = path.resolve("./src/templates/tags.js")
+const _ = require(`lodash.kebabcase`)
 
 /**
  * @type {import('gatsby').GatsbyNode['createPages']}
  */
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
+
+
+  // template
+  const blogPost = path.resolve(`src/templates/post-details.js`)
+  const categoriesTemplate = path.resolve("src/templates/categories.js");
+  const tagTemplate = path.resolve("./src/templates/tags.js")
 
   const result = await graphql(`
     {
@@ -35,6 +36,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             tags
           }
         }
+        categoryList:  distinct(field: {frontmatter: { category: SELECT }})
       }
       tagsGroup: allMarkdownRemark(limit: 2000) {
         group(field: { frontmatter: { tags: SELECT }}) {
@@ -73,10 +75,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   /* Tag */
   const tags = result.data.tagsGroup.group;
-
+  console.log("tags///////////////");
    tags.forEach(tag => {
+    console.log("tags222222///////////////");
     createPage({
-      path: `/tags/${kebabCase(tag.fieldValue)}/`,
+      path: `/tags/${_(tag.fieldValue)}/`,
       component: tagTemplate,
       context: {
         tag: tag.fieldValue,
@@ -85,11 +88,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   });
 
   /* Categories */
+  console.log("categories///////////////");
   const categories = result.data.allMarkdownRemark.categoryList
-
+  console.log(categories);
   categories.forEach(category => {
+    console.log("#"+category);
     createPage({
-      path: `/categories/${_.kebabCase(category)}/`,
+      path: `/categories/${_(category)}/`,
       component: categoriesTemplate,
       context: {
         category: category,

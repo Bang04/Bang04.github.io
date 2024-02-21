@@ -14,9 +14,7 @@ import { Link, graphql } from "gatsby"
   
   <div class="tags are-medium">
     <span class="tag">
-      <Link to="/">
-        All
-      </Link>
+      <Link to="/tags">All</Link>
     </span>
     {tags?.map(tag => (
         
@@ -49,3 +47,19 @@ TagsPage.propTypes = {
 }
 
 export default TagsPage
+
+export const pageQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+    allMarkdownRemark(limit: 2000) {
+      group(field: { frontmatter: { tags: SELECT }}) {
+        fieldValue
+        totalCount
+      }
+    }
+  }
+`
