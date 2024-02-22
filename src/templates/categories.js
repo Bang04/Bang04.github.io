@@ -6,18 +6,19 @@ import Layout from "../components/layout"
 import Tags from "../pages/tags"
 
 const Category = ( {  pageContext, data }) => {
+
   const { category } = pageContext
-  const { edges, totalCount } = data.allMarkdownRemark
+  const posts = data.allMarkdownRemark.nodes
 
     return (
-        <Layout location={location} title={title}>
-            <Seo title={title} />
+        <Layout location="" title={category} >
+            <Seo title={category} />
             <Bio />
             {/* <Tags tags = {tags} curTag = {tag}/> */}
-            <h1>{tagHeader}</h1>
+           
             <section class="section">
-                <ol  style={{ listStyle: `none` }}>
-                {posts.map(post => {
+              <ol  style={{ listStyle: `none` }}>
+                  {posts.map(post => {
                     const title = post.frontmatter.title || post.fields.slug
                     return (
                         <li class="card" key={post.fields.slug}>
@@ -41,8 +42,8 @@ const Category = ( {  pageContext, data }) => {
                             </article>
                         </li>
                     )
-                })}
-                </ol>
+                  })} 
+              </ol>
             </section>
         </Layout>
     )
@@ -51,7 +52,7 @@ export default Category
 
 // 쿼리의 argument인 $category는 page context로 전달 받는다.
 export const pageQuery = graphql`
-  query Category($category: String) {
+  query($category: String) {
     site {
       siteMetadata {
         title
@@ -60,19 +61,25 @@ export const pageQuery = graphql`
     allMarkdownRemark(
       limit: 2000
       sort: { fields: {slug: DESC}}
-      filter: { frontmatter: { category: { in: [$category] } } }
-    ) {
-      totalCount
-      edges {
-        node {
+      filter: { frontmatter: { category: { eq: $category } } }
+    ) 
+    {
+      group(field: { frontmatter: { category: SELECT }}) {
+        totalCount
+        }
+       nodes {
+         excerpt
           fields {
             slug
           }
           frontmatter {
+            category
+            tags
             title
+            description
+            date(formatString: "MMMM DD, YYYY")
           }
         }
-      }
     }
   }
 `

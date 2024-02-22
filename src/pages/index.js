@@ -16,14 +16,13 @@ const BlogIndex = ({ data, location, pageContext }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
   const categories = data.allMarkdownRemark.categoryList
-  const tags = data.allMarkdownRemark.group;
+  const  tags  = data.allMarkdownRemark.group;
   const { tag } = pageContext 
   const [filteredCat, setFilteredCat] = useState("All")
 
   const filterCatHandler = selected => {
     setFilteredCat(selected)
   }
-
 
   if (posts.length === 0) {
     return (
@@ -41,12 +40,12 @@ const BlogIndex = ({ data, location, pageContext }) => {
     <Layout location={location} title={siteTitle}  onChangeCat={filterCatHandler}>
       <Bio />
       <Categoris categories ={ categories }/>
-      <Tags tags = {tags} curTag = {''}/>
-
+    
       <section class="section">
       <ol  style={{ listStyle: `none` }}>
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug
+          const postTags  =  post.frontmatter.tags 
           return (
             // <PostsList posts={posts} />
             <li class="card" key={post.fields.slug}>
@@ -57,7 +56,7 @@ const BlogIndex = ({ data, location, pageContext }) => {
                       <span itemProp="headline">{title}</span>
                     </Link>
                   </div>
-                  <small>{post.frontmatter.date}</small>
+                 
                 </header>
                 <section>
                   <p class="subtitle is-6"
@@ -67,7 +66,12 @@ const BlogIndex = ({ data, location, pageContext }) => {
                     itemProp="description"
                   />
                 </section>
+                
+                <small>{post.frontmatter.date}</small>
               </article>
+              <div class="tags are-medium">
+                  {postTags.map((tag) => <span class="tag is-info is-light"># {tag}</span>)}
+                </div>
             </li>
           )
         })}

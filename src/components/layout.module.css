@@ -1,0 +1,23 @@
+.head{
+    grid-area: header;
+    border: 1px solid;
+}
+
+.sidebara{
+    grid-area: sidebar-a;
+    border: 1px solid;
+}
+
+.sidebarb{
+    grid-area: sidebar-b;
+    border: 1px solid;
+}
+
+.main{
+    grid-area: main;
+    border: 1px solid;
+}
+.footer{
+    grid-area: footer;
+    border: 1px solid;
+}

@@ -10,11 +10,14 @@ const TagTemplate = ({ pageContext, data }) => {
   const {tag }   = pageContext
   const posts = data.allMarkdownRemark.nodes
   const tags = data.allMarkdownRemark.group;
-
+  console.log(data);
   return (
     <Layout location={``} title={``}>
-      <Bio />
-      <Tags tags = {tags} curTag = {tag}/>
+      <div>
+        <h1 class="title is-2">{tag}</h1>
+        <h5 class="subtitle is-5">A collection of {posts.length } post </h5>
+      </div>
+    
           <section class="section">
             <ol  style={{ listStyle: `none` }}>
             {posts.map(post => {
