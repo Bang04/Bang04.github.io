@@ -1,23 +1,37 @@
+
+.container{
+    display: flex;
+    flex-direction:column;
+    width: 100%;
+    margin: 10px 0;
+}
+
 .head{
-    grid-area: header;
+    display: flex;
     border: 1px solid;
 }
-
-.sidebara{
-    grid-area: sidebar-a;
-    border: 1px solid;
-}
-
-.sidebarb{
-    grid-area: sidebar-b;
-    border: 1px solid;
-}
-
 .main{
-    grid-area: main;
+    display: flex;
     border: 1px solid;
 }
+.main .content{
+   flex: 1 auto;
+
+   border: 1px solid;
+}
+.main.sidebara{
+    display: inline-flex;
+    border: 1px solid;
+}
+
+.main.sidebarb{
+    display: inline-flex;
+    border: 1px solid;
+}
+
 .footer{
-    grid-area: footer;
+    display: flex;
     border: 1px solid;
 }
+
+

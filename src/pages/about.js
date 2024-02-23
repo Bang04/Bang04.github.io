@@ -4,13 +4,14 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
-function about () {
+function about ({location , data}) {
+    const siteTitle =  `About`
+
     return (
-        <h1> About 페이지 입니다. </h1>
-        // <Layout location={`/pages/about`} title={`about`}>
-        //     <Bio />
-        //     <h1> About 페이지 입니다. </h1>
-        // </Layout>
+        <Layout location={location} title={siteTitle} >
+
+            <h1> About 페이지 입니다. </h1>
+        </Layout>
     )
 }
 
