@@ -5,49 +5,58 @@ import Seo from "../components/seo"
 import PropTypes from "prop-types"
 import Layout from "../components/layout"
 import Tags from "../pages/tags"
+import * as Classes from './templates.module.css';
+
+
 const TagTemplate = ({ pageContext, data }) => {
 
   const {tag }   = pageContext
   const posts = data.allMarkdownRemark.nodes
   const tags = data.allMarkdownRemark.group;
-  console.log(data);
+
   return (
-    <Layout location={``} title={``}>
-      <div>
-        <h1 class="title is-2">{tag}</h1>
-        <h5 class="subtitle is-5">A collection of {posts.length } post </h5>
-      </div>
-    
-          <section class="section">
-            <ol  style={{ listStyle: `none` }}>
-            {posts.map(post => {
-                const title = post.frontmatter.title || post.fields.slug
-                return (
-                  // <PostsList posts={posts} />
-                  <li class="card" key={post.fields.slug}>
-                    <article class="card-content">
-                      <header>
-                        <div class="title">
-                          <Link to={post.fields.slug} itemProp="url">
-                            <span itemProp="headline">{title}</span>
-                          </Link>
-                        </div>
-                        <small>{post.frontmatter.date}</small>
-                      </header>
-                      <section>
-                        <p class="subtitle is-6"
-                          dangerouslySetInnerHTML={{
-                            __html: post.frontmatter.description || post.excerpt,
-                          }}
-                          itemProp="description"
-                        />
-                      </section>
-                    </article>
-                  </li>
-                )
-        })}
-            </ol>
-          </section>
+    <Layout location={``} title="Tag">
+
+        <section class="hero is-primary ">
+          <div class="hero-body">
+            <p className={Classes.menumame}>Tag</p>
+            <p className={Classes.tagname}>{tag}</p>
+            <p className={Classes.subname}>
+              A collection of {posts.length } post
+            </p>
+          </div>
+        </section>
+
+        <section class="section">
+          <ol  style={{ listStyle: `none` }}>
+          {posts.map(post => {
+              const title = post.frontmatter.title || post.fields.slug
+              return (
+                // <PostsList posts={posts} />
+                <li class="card" key={post.fields.slug}>
+                  <article class="card-content">
+                    <header>
+                      <div class="title">
+                        <Link to={post.fields.slug} itemProp="url">
+                          <span itemProp="headline">{title}</span>
+                        </Link>
+                      </div>
+                      <small>{post.frontmatter.date}</small>
+                    </header>
+                    <section>
+                      <p class="subtitle is-6"
+                        dangerouslySetInnerHTML={{
+                          __html: post.frontmatter.description || post.excerpt,
+                        }}
+                        itemProp="description"
+                      />
+                    </section>
+                  </article>
+                </li>
+              )
+      })}
+          </ol>
+        </section>
     </Layout>
   )
 }

@@ -10,25 +10,11 @@ const Layout = ({ location, title, children  }) => {
   //alert(JSON.stringify(location ));
   const rootPath = `${__PATH_PREFIX__}/`
   const isRootPath = location.pathname === rootPath
-  let header 
-  if (isRootPath) {
-    
-    header = (
-      <h3 className="main-heading">
-        <Link to="/">{title}</Link>
-      </h3>
-    )
-  } else {
-    header = (
-      <Link className="header-link-home" to="/">
-        {title}
-      </Link>
-    )
-  }
+
 
   return (
-    <div className={Classes.container}  data-is-root-path={isRootPath}>
-      <Header />
+    <div class="container is-widescreen is-fullheight"  data-is-root-path={isRootPath}>
+      <Header title= {title} isRootPath={isRootPath}/>
       <main>{children}</main>
       <Footer />
     </div>

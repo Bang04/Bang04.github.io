@@ -1,9 +1,12 @@
 import React from "react";
 import { Link, graphql } from "gatsby"
+import kebabCase from "lodash/kebabCase"
 import Bio from "../components/bio"
 import Seo from "../components/seo"
 import Layout from "../components/layout"
 import Tags from "../pages/tags"
+import * as Classes from './templates.module.css';
+
 
 const Category = ( {  pageContext, data }) => {
 
@@ -12,14 +15,22 @@ const Category = ( {  pageContext, data }) => {
 
     return (
         <Layout location="" title={category} >
-            <Seo title={category} />
-            <Bio />
-            {/* <Tags tags = {tags} curTag = {tag}/> */}
-           
+
+           <section class="hero is-primary is-halfheight">
+              <div class="hero-body">
+                <p className={Classes.menumame}>Category</p>
+                <p className={Classes.tagname}>{category}</p>
+                <p className={Classes.subname}>
+                  A collection of {posts.length } post
+                </p>
+              </div>
+            </section>
+
             <section class="section">
               <ol  style={{ listStyle: `none` }}>
                   {posts.map(post => {
                     const title = post.frontmatter.title || post.fields.slug
+                    const postTags  =  post.frontmatter.tags 
                     return (
                         <li class="card" key={post.fields.slug}>
                             <article class="card-content">
@@ -40,6 +51,14 @@ const Category = ( {  pageContext, data }) => {
                                 />
                             </section>
                             </article>
+                            <div class="tags are-medium">
+                                {postTags.map((tag) => (
+                                    <Link to={`/tags/${kebabCase(tag)}/`}>
+                                      <span class="tag is-info is-light"># {tag}</span>
+                                    </Link>
+                                  )
+                                )}
+                            </div>
                         </li>
                     )
                   })} 

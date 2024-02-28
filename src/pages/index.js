@@ -1,7 +1,9 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
 import { useState } from "react"
-import 'bulma/css/bulma.min.css';
+
+
+import kebabCase from "lodash/kebabCase"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
@@ -38,10 +40,11 @@ const BlogIndex = ({ data, location, pageContext }) => {
   }
   return (
     <Layout location={location} title={siteTitle}  onChangeCat={filterCatHandler}>
-      <Bio />
-      <Categoris categories ={ categories }/>
-    
-      <section class="section">
+      <section class="row" style={{ }}>
+        <Bio />
+        <Categoris categories ={ categories }/>
+      </section>
+      <section class="section row">
       <ol  style={{ listStyle: `none` }}>
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug
@@ -70,7 +73,13 @@ const BlogIndex = ({ data, location, pageContext }) => {
                 <small>{post.frontmatter.date}</small>
               </article>
               <div class="tags are-medium">
-                  {postTags.map((tag) => <span class="tag is-info is-light"># {tag}</span>)}
+
+                  {postTags.map((tag) => (
+                      <Link to={`/tags/${kebabCase(tag)}/`}>
+                        <span class="tag is-info is-light"># {tag}</span>
+                      </Link>
+                    )
+                  )}
                 </div>
             </li>
           )

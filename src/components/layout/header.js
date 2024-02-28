@@ -1,30 +1,27 @@
 import * as React from "react"
 import { Link  } from "gatsby"
+import 'bulma/css/bulma.min.css';
+import * as Classes from './header.module.css';
 
 const ListLink = props => (
-    <li style={{ display: `inline-block`, marginRight: `1rem` }}>
+    <li>
       <Link to={props.to}>{props.children}</Link>
     </li>
   )
 
-const header = () => {
+const header = ({title, isRootPath}) => {
+
     return (
-        <nav class="navbar is-success" role="navigation" aria-label="main navigation">
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            </a>
-            <header className="global-header">{header}</header>
-            <div class="navbar-menu">
-                <div class="navbar-end">
-                <ul>
-                    <ListLink to="/about" class="navbar-item">About</ListLink>
-                    <ListLink to="/blog" class="navbar-item">Tech</ListLink>
-                </ul>
-                </div>
+        <header className = {Classes.header}>
+          <div className = {Classes.top} >
+            <div className = {Classes.logo}>B-Blog</div>
+            <div className={Classes.menu}>
+                <ListLink to="/about" class="navbar-item">About</ListLink>
+                <ListLink to="/blog" class="navbar-item">Tech</ListLink>
             </div>
-        </nav>
+          </div>
+        </header>
+       
     )
 }
 export default header
