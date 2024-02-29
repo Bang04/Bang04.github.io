@@ -1,0 +1,10 @@
+.bio{
+    display: flex;
+    margin: 0 2rem;
+    padding: 1rem 1.5rem;
+    border: 1px solid;
+    align-items: center;
+    justify-content: center;
+}
+
+.bio p{ font-size: 0.9rem;}

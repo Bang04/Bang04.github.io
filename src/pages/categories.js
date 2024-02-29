@@ -1,15 +1,18 @@
 import React from "react";
 import { Link } from "gatsby";
 import kebabCase from "lodash/kebabCase"
+import 'bulma/css/bulma.min.css';
+import * as Classes from './categories.module.css';
+
 
 const Categories = ({ categories }) => {
 
    return (
-        <div>
+        <div  class={Classes.category}>
              <p class="menu-label">
                 categories
             </p>
-             <ul class="menu-list">
+             <ul class="menu-list is-one-third">
              {categories?.map(category => (
                      <li>
                         <Link to={`/categories/${kebabCase(category)}/`}>

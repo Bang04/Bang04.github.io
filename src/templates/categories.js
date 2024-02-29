@@ -6,17 +6,16 @@ import Seo from "../components/seo"
 import Layout from "../components/layout"
 import Tags from "../pages/tags"
 import * as Classes from './templates.module.css';
-
+import Categoris from "../pages/categories"
 
 const Category = ( {  pageContext, data }) => {
 
   const { category } = pageContext
   const posts = data.allMarkdownRemark.nodes
-
+  const categories = data.allMarkdownRemark.categoryList
     return (
         <Layout location="" title={category} >
-
-           <section class="hero is-primary is-halfheight">
+           <section class="hero is-primary">
               <div class="hero-body">
                 <p className={Classes.menumame}>Category</p>
                 <p className={Classes.tagname}>{category}</p>

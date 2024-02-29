@@ -40,53 +40,59 @@ const BlogIndex = ({ data, location, pageContext }) => {
   }
   return (
     <Layout location={location} title={siteTitle}  onChangeCat={filterCatHandler}>
-      <section class="row" style={{ }}>
+      <div class="container">
         <Bio />
-        <Categoris categories ={ categories }/>
-      </section>
-      <section class="section row">
-      <ol  style={{ listStyle: `none` }}>
-        {posts.map(post => {
-          const title = post.frontmatter.title || post.fields.slug
-          const postTags  =  post.frontmatter.tags 
-          return (
-            // <PostsList posts={posts} />
-            <li class="card" key={post.fields.slug}>
-              <article class="card-content">
-                <header>
-                  <div class="title">
-                    <Link to={post.fields.slug} itemProp="url">
-                      <span itemProp="headline">{title}</span>
-                    </Link>
-                  </div>
-                 
-                </header>
-                <section>
-                  <p class="subtitle is-6"
-                    dangerouslySetInnerHTML={{
-                      __html: post.frontmatter.description || post.excerpt,
-                    }}
-                    itemProp="description"
-                  />
-                </section>
-                
-                <small>{post.frontmatter.date}</small>
-              </article>
-              <div class="tags are-medium">
-
-                  {postTags.map((tag) => (
-                      <Link to={`/tags/${kebabCase(tag)}/`}>
-                        <span class="tag is-info is-light"># {tag}</span>
-                      </Link>
-                    )
-                  )}
-                </div>
-            </li>
-          )
-        })}
-      </ol>
-      </section >
-     
+        <section class="section" style={{ display: `flex` }}>
+          <Categoris categories ={ categories }/>
+          <div >
+            <div class="section">
+              <input class="input is-primary is-small" type="text" placeholder="Primary input" />
+              <button class="button is-success">검색</button>
+            </div>
+            <ol  style={{ listStyle: `none` }}>
+              {posts.map(post => {
+                const title = post.frontmatter.title || post.fields.slug
+                const postTags  =  post.frontmatter.tags 
+                return (
+                  // <PostsList posts={posts} />
+                  <li class="card" key={post.fields.slug}>
+                    <article class="card-content">
+                      <header>
+                        <div class="title">
+                          <Link to={post.fields.slug} itemProp="url">
+                            <span itemProp="headline">{title}</span>
+                          </Link>
+                        </div>
+                      
+                      </header>
+                      <section>
+                        <p class="subtitle is-6"
+                          dangerouslySetInnerHTML={{
+                            __html: post.frontmatter.description || post.excerpt,
+                          }}
+                          itemProp="description"
+                        />
+                      </section>
+                      
+                      <small>{post.frontmatter.date}</small>
+                      
+                      <div class="tags are-medium">
+                        {postTags.map((tag) => (
+                            <Link to={`/tags/${kebabCase(tag)}/`}>
+                              <span class="tag is-info is-light"># {tag}</span>
+                            </Link>
+                          )
+                        )}
+                      </div>
+                    </article>
+                   
+                  </li>
+                )
+              })}
+            </ol>
+        </div>
+        </section >
+      </div>
     </Layout>
   )
 }

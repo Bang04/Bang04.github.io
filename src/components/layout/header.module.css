@@ -1,14 +1,20 @@
 .header{
     display: flex;
     flex-direction: column;
-    padding: 1rem 2rem;
+    margin: 1rem 2rem;
 }
 
 .header div{
     border: 1px solid;
 }
-.header .top{  display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 3rem;}
+.header .top{  display: flex; flex-direction: row; justify-content: space-between;}
 .header .logo{ font-size: 2rem; font-weight: bold; color: rgb(116, 170, 245);}
 .header .menu{display: flex;   flex-direction: row;}
 .header .menu li{ list-style: none; margin:0; padding: 0.5rem 1rem;}
-.header .menu li a{font-weight: bold; font-size :1.3rem; font-weight:  1.5; }
+.header .menu li a{
+    color: hsl(0deg, 0%, 29%);
+    display: block;
+    line-height: 1.5;
+    padding: 0.5rem 0.75rem;
+    position: relative;
+}
