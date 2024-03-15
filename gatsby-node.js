@@ -75,9 +75,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   /* Tag */
   const tags = result.data.tagsGroup.group;
-  console.log("tags///////////////");
    tags.forEach(tag => {
-    console.log("tags222222///////////////");
     createPage({
       path: `/tags/${_(tag.fieldValue)}/`,
       component: tagTemplate,
@@ -88,11 +86,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   });
 
   /* Categories */
-  console.log("categories///////////////");
   const categories = result.data.allMarkdownRemark.categoryList
-  console.log(categories);
   categories.forEach(category => {
-    console.log("#"+category);
     createPage({
       path: `/categories/${_(category)}/`,
       component: categoriesTemplate,

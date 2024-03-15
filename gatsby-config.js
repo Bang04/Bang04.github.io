@@ -134,13 +134,16 @@ module.exports = {
                 frontmatter {
                   title
                 }
+                fields {
+                  slug
+                }
               }
             }
           }
         `,
  
         // 인덱스를 만들고자 하는 데이터의 프로퍼티
-        keys: ['title', 'body'],
+        keys: ['title', 'body','slug'],
  
         // graphql의 결과물을 단순 객체 배열로 변환하는 함수
         normalizer: ({ data }) =>
@@ -148,6 +151,7 @@ module.exports = {
             id: node.id,
             title: node.frontmatter.title,
             body: node.rawMarkdownBody,
+            slug: node.fields.slug,
           })),
       },
     },
