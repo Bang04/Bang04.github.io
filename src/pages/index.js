@@ -11,7 +11,8 @@ import Seo from "../components/seo"
 import Tags from "../pages/tags"
 import Categoris from "../pages/categories"
 import PostsList from "../components/post/list";
-
+// import Search from "../components/search"
+import Search from "./search"
 
 const BlogIndex = ({ data, location, pageContext }) => {
 
@@ -46,8 +47,8 @@ const BlogIndex = ({ data, location, pageContext }) => {
           <Categoris categories ={ categories }/>
           <div >
             <div class="section">
-              <input class="input is-primary is-small" type="text" placeholder="Primary input" />
-              <button class="button is-success">검색</button>
+              <Search />
+               {/* <button class="button is-success">검색</button> */}
             </div>
             <ol  style={{ listStyle: `none` }}>
               {posts.map(post => {

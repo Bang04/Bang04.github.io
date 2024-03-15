@@ -8,3 +8,9 @@ import "./src/style.css"
 
 // Highlighting for code blocks
 import "prismjs/themes/prism.css"
+import React from 'react'
+import { AppProvider } from './src/context/app'
+
+export const wrapRootElement = ({ element }) => {
+  return <AppProvider>{element}</AppProvider>
+}

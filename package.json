@@ -13,6 +13,7 @@
     "bulma": "^0.9.4",
     "gatsby": "^5.13.2",
     "gatsby-plugin-feed": "^5.13.1",
+    "gatsby-plugin-fusejs": "^2.0.2",
     "gatsby-plugin-image": "^3.13.1",
     "gatsby-plugin-manifest": "^5.13.1",
     "gatsby-plugin-sharp": "^5.13.1",
@@ -29,7 +30,8 @@
     "react": "^18.1.0",
     "react-burger-menu": "^3.0.9",
     "react-dom": "^18.1.0",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "react-use-fusejs": "^2.0.2"
   },
   "devDependencies": {
     "prettier": "^2.8.8"

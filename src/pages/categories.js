@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "gatsby";
+import { Link, graphql } from "gatsby"
 import kebabCase from "lodash/kebabCase"
 import 'bulma/css/bulma.min.css';
 import * as Classes from './categories.module.css';
