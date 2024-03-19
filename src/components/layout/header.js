@@ -14,7 +14,7 @@ const header = ({title, isRootPath}) => {
     return (
         <header className = {Classes.header}>
           <div className = {Classes.top} >
-            <div className = {Classes.logo}> <Link to="/">B-Blog</Link></div>
+            <div className = {Classes.logo}> <Link to="/">TechLog</Link></div>
             <div className={Classes.menu}>
                 <ListLink to="/about" class="navbar-item">About</ListLink>
                 <ListLink to="/blog" class="navbar-item">Tech</ListLink>

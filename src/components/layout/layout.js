@@ -1,10 +1,10 @@
 import * as React from "react"
 import { Link  } from "gatsby"
 import { Helmet } from "react-helmet"
-import * as Classes from './layout.module.css';
+//import * as Classes from './layout.module.css';
 
-import Header from "./layout/header"
-import Footer from "./layout/footer"
+import Header from "./header"
+import Footer from "./footer"
 
 const Layout = ({ location, title, children  }) => {
   //alert(JSON.stringify(location ));
@@ -13,7 +13,7 @@ const Layout = ({ location, title, children  }) => {
 
 
   return (
-    <div class="container is-widescreen is-fullheight"  data-is-root-path={isRootPath}>
+    <div  data-is-root-path={isRootPath}>
       <Header title= {title} isRootPath={isRootPath}/>
       <main>{children}</main>
       <Footer />

@@ -3,7 +3,7 @@ import { Link, graphql } from "gatsby"
 import Bio from "../components/bio"
 import Seo from "../components/seo"
 import PropTypes from "prop-types"
-import Layout from "../components/layout"
+import Layout from "../components/layout/layout"
 import Tags from "../pages/tags"
 import * as Classes from './templates.module.css';
 

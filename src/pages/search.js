@@ -1,6 +1,8 @@
-import { Link, useStaticQuery, graphql } from 'gatsby'
 import * as React from 'react'
+import { Link, useStaticQuery, graphql } from 'gatsby'
 import { useGatsbyPluginFusejs } from 'react-use-fusejs'
+import * as Classes from './search.module.css';
+
 export function Search() {
   const data = useStaticQuery(graphql`
     {
@@ -14,16 +16,17 @@ export function Search() {
  
   const [query, setQuery] = React.useState('')
   const result = useGatsbyPluginFusejs(query, data.fusejs)
-   //const url = data.allMarkdownRemark.nodes;
-   console.log(result);
+
   return (
-    <div>
+    <div className={Classes.search}>
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        className='input is-primary is-normal'
+        placeholder="Text input"
       />
-      <ul>
+      <ul className={Classes.result}>
         {result.map(({ item }) => (
           <li key={item.id}>
             <Link to={item.slug } itemProp="url">

@@ -1,7 +1,7 @@
 import React from "react";
 
 import Bio from "../components/bio"
-import Layout from "../components/layout"
+import Layout from "../components/layout/layout"
 import Seo from "../components/seo"
 
 function about ({location , data}) {

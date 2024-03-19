@@ -33,16 +33,16 @@ const Bio = () => {
   const social = data.site.siteMetadata?.social
 
   return (
-    <div class={Classes.bio}>
+    <div className={Classes.bio}>
       <StaticImage
         className="bio-avatar"
         layout="fixed"
         formats={["auto", "webp", "avif"]}
         src="../images/pubao_pro.png"
-        width={100}
-        height={100}
+        width={70}
+        height={70}
         quality={95}
-        alt="Profile picture"
+        alt="myProfile"
       />
       {author?.name && (
         <p>

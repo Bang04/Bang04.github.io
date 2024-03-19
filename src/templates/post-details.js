@@ -2,29 +2,41 @@ import * as React from "react"
 import { Link, graphql } from "gatsby"
 
 import Bio from "../components/bio"
-import Layout from "../components/layout"
+import Layout from "../components/layout/layout"
 import Seo from "../components/seo"
 import Tags from "../pages/tags" 
+import Categoris from "../pages/categories"
 
 const BlogPostTemplate = ({
   data: { previous, next, site, markdownRemark: post, location = "",  
   },
 
 }) => {
+
   const siteTitle = site.siteMetadata?.title || `Title`
+  // const categories = data.allMarkdownRemark.categoryList
+  const  tags  = post.frontmatter.tags;
+  console.log(tags);
+
+  // const { tag } = pageContext 
+
   return (
     <Layout location={location} title={siteTitle}>
         {/* <Layout location={`/blog/`} title={siteTitle}></Layout> */}
+        {/* <Categoris categories ={ categories }/> */}
+  
       <article
-          className="blog-post"
+          className="section blog-post"
           itemScope
           itemType="http://schema.org/Article"
         >
           <header>
-            <h1 itemProp="headline">{post.frontmatter.title}</h1>
+            <div className="title">{post.frontmatter.title}</div>
             <p>{post.frontmatter.date}</p>
+
+            <Tags tags = { tags } />
           </header>
-          <section
+          <div className="content"
             dangerouslySetInnerHTML={{ __html: post.html }}
             itemProp="articleBody"
           />

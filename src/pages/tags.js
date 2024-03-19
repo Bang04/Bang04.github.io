@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-
+import Seo from "../components/seo"
 // Utilities
 import kebabCase from "lodash/kebabCase"
 import 'bulma/css/bulma.min.css';
@@ -13,16 +13,17 @@ import { Link, graphql } from "gatsby"
  const TagsPage = ({tags, curTag }) => (
   
   <div class="tags are-medium">
-    <span class="tag">
-      <Link to="/tags">All</Link>
-    </span>
     {tags?.map(tag => (
-        
-          <span class={kebabCase(tag.fieldValue) === kebabCase(curTag)? "tag is-success" : "tag"}  key={kebabCase(tag.fieldValue)}>
-            <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
-              {tag.fieldValue} ({tag.totalCount})
-            </Link>
-          </span>
+         <span className="tag is-success">
+          <Link to={`/tags/${kebabCase(tag)}/`}>
+            {tag}
+          </Link>
+        </span>
+          // <span class={kebabCase(tag.fieldValue) === kebabCase(curTag)? "tag is-success" : "tag"}  key={kebabCase(tag.fieldValue)}>
+          //   <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
+          //     {tag.fieldValue} ({tag.totalCount})
+          //   </Link>
+          // </span>
           
         ))}
   </div>

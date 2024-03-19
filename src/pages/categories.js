@@ -8,9 +8,9 @@ import * as Classes from './categories.module.css';
 const Categories = ({ categories }) => {
 
    return (
-        <div  class={Classes.category}>
+        <div className={Classes.categories}>
              <p class="menu-label">
-                categories
+              <b>categories</b>  
             </p>
              <ul class="menu-list is-one-third">
              {categories?.map(category => (

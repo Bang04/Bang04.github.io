@@ -3,7 +3,7 @@ import { Link, graphql } from "gatsby"
 import kebabCase from "lodash/kebabCase"
 import Bio from "../components/bio"
 import Seo from "../components/seo"
-import Layout from "../components/layout"
+import Layout from "../components/layout/layout"
 import Tags from "../pages/tags"
 import * as Classes from './templates.module.css';
 import Categoris from "../pages/categories"
