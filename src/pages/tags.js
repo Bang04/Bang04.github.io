@@ -14,9 +14,9 @@ import { Link, graphql } from "gatsby"
   
   <div class="tags are-medium">
     {tags?.map(tag => (
-         <span className="tag is-success">
+         <span className="tag is-info">
           <Link to={`/tags/${kebabCase(tag)}/`}>
-            {tag}
+            <p className="has-text-white">{tag}</p>
           </Link>
         </span>
           // <span class={kebabCase(tag.fieldValue) === kebabCase(curTag)? "tag is-success" : "tag"}  key={kebabCase(tag.fieldValue)}>

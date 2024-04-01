@@ -13,6 +13,7 @@ const Category = ( {  pageContext, data }) => {
   const { category } = pageContext
   const posts = data.allMarkdownRemark.nodes
   const categories = data.allMarkdownRemark.categoryList
+  
     return (
         <Layout location="" title={category} >
            <section class="hero is-primary">

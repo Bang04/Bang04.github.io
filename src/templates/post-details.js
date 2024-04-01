@@ -6,6 +6,7 @@ import Layout from "../components/layout/layout"
 import Seo from "../components/seo"
 import Tags from "../pages/tags" 
 import Categoris from "../pages/categories"
+import * as Classes from './post-details.module.css';
 
 const BlogPostTemplate = ({
   data: { previous, next, site, markdownRemark: post, location = "",  
@@ -26,26 +27,32 @@ const BlogPostTemplate = ({
         {/* <Categoris categories ={ categories }/> */}
   
       <article
-          className="section blog-post"
+          className={Classes.post}
           itemScope
           itemType="http://schema.org/Article"
         >
-          <header>
-            <div className="title">{post.frontmatter.title}</div>
-            <p>{post.frontmatter.date}</p>
+          <header className={Classes.header}>
+            <div className={Classes.title}>
+              <p>{post.frontmatter.title}</p>
+            </div>
+            <div className={Classes.date}>
+              <p>{post.frontmatter.date}</p>
+            </div>
 
             <Tags tags = { tags } />
+            
           </header>
-          <div className="content"
+
+          <div className={Classes.content}
             dangerouslySetInnerHTML={{ __html: post.html }}
             itemProp="articleBody"
-          />
-          <hr />
-          <footer>
+          /> 
+
+          <footer className={Classes.footer}>
             <Bio />
           </footer>
       </article>
-      <nav className="blog-post-nav">
+      <nav className={Classes.nav}>
         <ul
           style={{
             display: `flex`,

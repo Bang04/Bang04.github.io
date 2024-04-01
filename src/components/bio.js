@@ -39,8 +39,8 @@ const Bio = () => {
         layout="fixed"
         formats={["auto", "webp", "avif"]}
         src="../images/pubao_pro.png"
-        width={70}
-        height={70}
+        width={45}
+        height={50}
         quality={95}
         alt="myProfile"
       />

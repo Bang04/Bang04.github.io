@@ -23,7 +23,7 @@ export function Search() {
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className='input is-primary is-normal'
+        className='input is-info is-normal'
         placeholder="Text input"
       />
       <ul className={Classes.result}>
