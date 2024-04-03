@@ -37,7 +37,7 @@
   "devDependencies": {
     "prettier": "^2.8.8"
   },
-  "homepage": "https://github.com/gatsbyjs/gatsby-blog/src/pages",
+  "homepage": "https://github.com/gatsbyjs/gatsby-blog",
   "keywords": [
     "gatsby"
   ],
@@ -54,7 +54,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build"
   }
 }
