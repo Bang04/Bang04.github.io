@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkgatsby_starter_blog=self.webpackChunkgatsby_starter_blog||[]).push([[682],{5465:function(t,e,a){a.r(e);var l=a(7294),n=(a(3628),a(1648));a(9357);e.default=function(t){let{location:e,data:a}=t;return l.createElement(n.Z,{location:e,title:"About"},l.createElement("h1",null," About 페이지 입니다. "))}}}]);
+//# sourceMappingURL=component---src-pages-about-js-e6b89f49f690f61d054f.js.map
