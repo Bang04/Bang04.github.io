@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-starter-blog",
+  "name": "gatsby-blog",
   "private": true,
   "description": "A starter for a blog powered by Gatsby and Markdown",
   "version": "0.1.0",
@@ -36,14 +36,14 @@
   "devDependencies": {
     "prettier": "^2.8.8"
   },
-  "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog/pages",
+  "homepage": "https://github.com/gatsbyjs/gatsby-blog/src/pages",
   "keywords": [
     "gatsby"
   ],
   "license": "0BSD",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+    "url": "git+https://github.com/gatsbyjs/gatsby-blog.git"
   },
   "scripts": {
     "build": "gatsby build",
