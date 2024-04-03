@@ -5,8 +5,6 @@ import Seo from "../components/seo"
 import PropTypes from "prop-types"
 import Layout from "../components/layout/layout"
 import Tags from "../pages/tags"
-import * as Classes from './templates.module.css';
-
 
 const TagTemplate = ({ pageContext, data }) => {
 
@@ -19,9 +17,9 @@ const TagTemplate = ({ pageContext, data }) => {
 
         <section class="hero is-primary ">
           <div class="hero-body">
-            <p className={Classes.menumame}>Tag</p>
-            <p className={Classes.tagname}>{tag}</p>
-            <p className={Classes.subname}>
+            <p>Tag</p>
+            <p>{tag}</p>
+            <p>
               A collection of {posts.length } post
             </p>
           </div>

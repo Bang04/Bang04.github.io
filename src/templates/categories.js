@@ -5,7 +5,6 @@ import Bio from "../components/bio"
 import Seo from "../components/seo"
 import Layout from "../components/layout/layout"
 import Tags from "../pages/tags"
-import * as Classes from './templates.module.css';
 import Categoris from "../pages/categories"
 
 const Category = ( {  pageContext, data }) => {
@@ -18,9 +17,9 @@ const Category = ( {  pageContext, data }) => {
         <Layout location="" title={category} >
            <section class="hero is-primary">
               <div class="hero-body">
-                <p className={Classes.menumame}>Category</p>
-                <p className={Classes.tagname}>{category}</p>
-                <p className={Classes.subname}>
+                <p>Category</p>
+                <p>{category}</p>
+                <p>
                   A collection of {posts.length } post
                 </p>
               </div>
