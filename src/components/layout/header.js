@@ -18,10 +18,6 @@ const header = ({title, isRootPath}) => {
             <div className = {Classes.logo}>
                <Link to="/">TechLog</Link>
             </div>
-            {/* <div className={Classes.menu}>
-                <ListLink to="/about" class="navbar-item">About</ListLink>
-                <ListLink to="/blog" class="navbar-item">Tech</ListLink>
-            </div> */}
           </div>
         </header>
        

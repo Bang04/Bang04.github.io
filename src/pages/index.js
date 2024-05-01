@@ -1,24 +1,35 @@
-import * as React from "react"
+import React , { useState } from "react"
 import { Link, graphql } from "gatsby"
-import { useState } from "react"
+import { Routes, Route } from 'react-router-dom';
+import kebabCase from "lodash/kebabCase"
+import * as Classes from './index.module.css';
 
 import Bio from "../components/bio"
 import Layout from "../components/layout/layout"
 import Seo from "../components/seo"
-import Categoris from "../pages/categories"
+// Template Component
+import CategoryTemplate from "../templates/categories"
+import TagTemplate from "../templates/tags"
+// Component
 import Search from "./search"
+import TagList from "./tags"
+import CategoryList from "./categories";
+import PostDetil from "./detail"
 
-import kebabCase from "lodash/kebabCase"
-
-import * as Classes from './index.module.css';
 
 const BlogIndex = ({ data, location, pageContext }) => {
 
   const siteTitle = data.site.siteMetadata?.title || `Title`
-  const posts = data.allMarkdownRemark.nodes
-  const categories = data.allMarkdownRemark.categoryList
-  const  tags  = data.allMarkdownRemark.group;
-  const { tag } = pageContext 
+  const { posts } = data.allMarkdownRemark.nodes
+  const { categories } = data.GroupCategory.group
+
+
+
+  // const  tags  = data.allMarkdownRemark.group
+
+  // const { tag } = pageContext 
+
+  //console.log("tag : "+tag);
   const [filteredCat, setFilteredCat] = useState("All")
 
   const filterCatHandler = selected => {
@@ -37,16 +48,24 @@ const BlogIndex = ({ data, location, pageContext }) => {
       </Layout>
     )
   }
+
   return (
     <Layout location={location} title={siteTitle}  onChangeCat={filterCatHandler}>
-        <div className={Classes.container}>
+      <div className={Classes.container}>
           <div className={Classes.leftmenu}>
-            {/* <Bio /> */}
-            <Categoris categories ={ categories }/>
+            <CategoryList data = { categories }/>
           </div>
           <div>
-            <Search />
-            <div className={Classes.posts}>
+          <Search />
+          <Routes>
+              {/* <Route path="/" element={<CategoryTemplate />} /> */}
+              <Route path="/category/" element={<CategoryTemplate />} />
+              <Route path="/tag/" element={<TagTemplate />} />
+              <Route path="/detaile/" element={<PostDetil  data ={ posts }/>} />
+            </Routes>
+          
+           
+           {/*  <div className={Classes.posts}>
                 <ol  style={{ listStyle: `none` }}>
                   {posts.map(post => {
                     const title = post.frontmatter.title || post.fields.slug
@@ -88,7 +107,7 @@ const BlogIndex = ({ data, location, pageContext }) => {
                     )
                   })}
                 </ol>
-            </div>
+            </div> */}
           </div>
          
         </div>
@@ -114,6 +133,11 @@ query {
         title
       }
     }
+    GroupCategory :allMarkdownRemark(limit: 2000)  {
+      group(field: {frontmatter: {category: SELECT}}){
+        fieldValue
+      }
+    } 
     allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
       group(field: { frontmatter: { tags: SELECT }}) {
         fieldValue
@@ -133,8 +157,6 @@ query {
          
         }
       }
-      categoryList:  distinct(field: {frontmatter: {category: SELECT}})
-     
     }
   }
 `

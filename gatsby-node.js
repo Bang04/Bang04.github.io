@@ -8,6 +8,7 @@
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 const _ = require(`lodash.kebabcase`)
+//const { post } = require('jquery')
 
 /**
  * @type {import('gatsby').GatsbyNode['createPages']}
@@ -15,16 +16,16 @@ const _ = require(`lodash.kebabcase`)
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
-
   // template
-  const blogPost = path.resolve(`src/templates/post-details.js`)
-  const categoriesTemplate = path.resolve("src/templates/categories.js");
-  const tagTemplate = path.resolve("./src/templates/tags.js")
+  const blogPostTemplate = path.resolve(`src/templates/post-details.js`)
+  const tagTemplate = path.resolve("src/templates/tags.js")
+  const categoryTemplate = path.resolve("src/templates/categories.js")
+//  const blogListTemplate = path.resolve("./src/templates/post-list.js")
 
-  const result = await graphql(`
+  const { data } = await graphql(`
     {
       allMarkdownRemark(
-        sort: { frontmatter: { date: ASC } },
+        sort: { frontmatter: { date: DESC } },
         limit: 1000
       ) {
         nodes {
@@ -36,48 +37,49 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             tags
           }
         }
-        categoryList:  distinct(field: {frontmatter: { category: SELECT }})
       }
-      tagsGroup: allMarkdownRemark(limit: 2000) {
+      GroupTags: allMarkdownRemark(limit: 2000) {
         group(field: { frontmatter: { tags: SELECT }}) {
           fieldValue
         }
       }
+      GroupCategory :allMarkdownRemark(limit: 2000)  {
+        group(field: {frontmatter: {category: SELECT}}){
+          fieldValue
+        }
+      } 
     }
   `)
 
-  if (result.errors) {
+  if (data.errors) {
     reporter.panicOnBuild(
       `There was an error loading your blog posts`,
-      result.errors
+      data.errors
     )
     return
   }
 
-  const posts = result.data.allMarkdownRemark.nodes
-
-  if (posts.length > 0) {
-    posts.forEach((post, index) => {
-      const previousPostId = index === 0 ? null : posts[index - 1].id
-      const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id;
-      createPage({
-        path: post.fields.slug,
-        component: blogPost,
-        context: {
-          id: post.id,
-          previousPostId,
-          nextPostId,
-        },
-      })
+   /* Post Detaile By Slug */
+  const posts = data.allMarkdownRemark.nodes
+  posts.forEach((post, index) => {
+    const previousPostId = index === 0 ? null : posts[index - 1].id
+    const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id;
+    createPage({
+      path: post.fields.slug,
+      component: blogPostTemplate,
+      context: {
+        id: post.id,
+        previousPostId,
+        nextPostId,
+      },
     })
+  })
 
-  }
-
-  /* Tag */
-  const tags = result.data.tagsGroup.group;
+  /* Post List By Tag */
+  const tags = data.GroupTags.group;
    tags.forEach(tag => {
     createPage({
-      path: `/tags/${_(tag.fieldValue)}/`,
+      path: `/tag/${_(tag.fieldValue)}/`,
       component: tagTemplate,
       context: {
         tag: tag.fieldValue,
@@ -85,14 +87,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     })
   });
 
-  /* Categories */
-  const categories = result.data.allMarkdownRemark.categoryList
+  /* Post List By Categories */
+  const categories = data.GroupCategory.group;
+  console.log("cateogory node : "+categories);
   categories.forEach(category => {
     createPage({
-      path: `/categories/${_(category)}/`,
-      component: categoriesTemplate,
+      path: `/category/${_(category.fieldValue)}/`,
+      component: categoryTemplate,
       context: {
-        category: category,
+        category: category.fieldValue,
       },
     })
   })

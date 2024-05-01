@@ -5,54 +5,38 @@ import 'bulma/css/bulma.min.css';
 import * as Classes from './categories.module.css';
 
 
-const Categories = ({ categories }) => {
+export default function Categories({ pageContext ,data }){
 
    return (
-        <div className={Classes.categories}>
-             <p class="menu-label">
-              <b>categories</b>  
-            </p>
-             <ul class="menu-list is-one-third">
-             {categories?.map(category => (
-                     <li>
-                        <Link to={`/categories/${kebabCase(category)}/`}>
-                            { category }
-                        </Link>
-                    </li>
+        <div>
+          <p className="menu-label">
+          <b>categories</b>  
+          </p>
+          <ul className="menu-list is-one-third">
+            {data?.map(category => (
+                  <li>
+                    <Link to={`/categories/${kebabCase(category.fieldValue)}/`}>
+                        { category.fieldValue }
+                    </Link>
+                  </li>
                 )
-             )
-             }
-              {/* <a class="is-active">Manage Your Team</a> */}
-            </ul>
+              ) 
+            }
+          </ul>
         </div>
     )
 }
-
-export default Categories
-
-export const pageQuery = graphql`
-  query Category($category: String) {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-    allMarkdownRemark(
-      limit: 2000
-      sort: { fields: {slug: DESC}}
-      filter: { frontmatter: { category: { in: [$category] } } }
-    ) {
-      totalCount
-      edges {
-        node {
-          fields {
-            slug
-          }
-          frontmatter {
-            title
-          }
-        }
-      }
-    }
-  }
-`
+// export const pageQuery = graphql`
+//   query {
+//     site {
+//       siteMetadata {
+//         title
+//       }
+//     }
+//     allMarkdownRemark {
+//       group(field: {frontmatter: {category: SELECT}}) {
+//         fieldValue
+//       }
+//     }
+//   }
+// `

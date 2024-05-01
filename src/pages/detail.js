@@ -1,28 +1,25 @@
-import * as React from "react"
+import React from "react";
 import { Link, graphql } from "gatsby"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout/layout"
 import Seo from "../components/seo"
 import Tags from "../pages/tags" 
-import Categoris from "../pages/categories"
-import * as Classes from './post-details.module.css';
+import * as Classes from '../templates/post-details.module.css';
 
-const BlogPostTemplate = ({
-  data: { previous, next, site, markdownRemark: post, location = "",  
-  },
-
-}) => {
-
-  const siteTitle = site.siteMetadata?.title || `Title`
-  // const categories = data.allMarkdownRemark.categoryList
-  const  tags  = post.frontmatter.tags;
-  console.log("BlogPostTemplate call");
-
-  // const { tag } = pageContext 
-
-  return (
-    <Layout location={location} title={siteTitle}>
+const PostDtail = ({
+        data: { previous, next, site, markdownRemark: post, location = "",  
+        },
+      
+      }) => {
+      
+        const siteTitle = site.siteMetadata?.title || `Title`
+        // const categories = data.allMarkdownRemark.categoryList
+        const  tags  = post.frontmatter.tags;
+        console.log(tags);
+      
+    return(
+        <Layout location={location} title={siteTitle}>
         {/* <Layout location={`/blog/`} title={siteTitle}></Layout> */}
         {/* <Categoris categories ={ categories }/> */}
   
@@ -39,7 +36,7 @@ const BlogPostTemplate = ({
               <p>{post.frontmatter.date}</p>
             </div>
 
-            {/* <Tags tags = { tags } /> */}
+            <Tags tags = { tags } />
             
           </header>
 
@@ -79,19 +76,10 @@ const BlogPostTemplate = ({
         </ul>
       </nav>
       </Layout>
-  )
+    )
 }
 
-export const Head = ({ data: { markdownRemark: post } }) => {
-  return (
-    <Seo
-      title={post.frontmatter.title}
-      description={post.frontmatter.description || post.excerpt}
-    />
-  )
-}
-
-export default BlogPostTemplate
+export default PostDtail;
 
 export const pageQuery = graphql`
   query BlogPostBySlug(

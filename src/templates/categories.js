@@ -1,40 +1,38 @@
 import React from "react";
 import { Link, graphql } from "gatsby"
 import kebabCase from "lodash/kebabCase"
-import Bio from "../components/bio"
-import Seo from "../components/seo"
 import Layout from "../components/layout/layout"
-import Tags from "../pages/tags"
-import Categoris from "../pages/categories"
 
-const Category = ( {  pageContext, data }) => {
-
+const CategoryTemplate = ( { pageContext, data }) => {
   const { category } = pageContext
-  const posts = data.allMarkdownRemark.nodes
-  const categories = data.allMarkdownRemark.categoryList
-  
+   const posts = data.allMarkdownRemark.nodes
+   //const page = JSON.parse(pageContext);
+   console.log("Categories pageContext" + typeof page);
+  // const categories = data.allMarkdownRemark.categoryList
+  console.log("Categories Template call");
+
     return (
-        <Layout location="" title={category} >
-           <section class="hero is-primary">
-              <div class="hero-body">
+        <Layout location="" title="category" >
+           <section className="hero is-primary">
+              <div className="hero-body">
                 <p>Category</p>
                 <p>{category}</p>
-                <p>
-                  A collection of {posts.length } post
-                </p>
+                <p> A collection of {posts.length } post</p>
               </div>
             </section>
 
-            <section class="section">
+            <section className="section">
               <ol  style={{ listStyle: `none` }}>
-                  {posts.map(post => {
+                  {posts?.map(post => {
                     const title = post.frontmatter.title || post.fields.slug
                     const postTags  =  post.frontmatter.tags 
+                    const category   =  post.frontmatter.category 
                     return (
-                        <li class="card" key={post.fields.slug}>
-                            <article class="card-content">
+                        <li className="card" key={post.fields.slug}>
+                            <article className="card-content">
                             <header>
-                                <div class="title">
+                                <div className="title">
+                                <div className="category">{category}</div>
                                 <Link to={post.fields.slug} itemProp="url">
                                     <span itemProp="headline">{title}</span>
                                 </Link>
@@ -42,7 +40,7 @@ const Category = ( {  pageContext, data }) => {
                                 <small>{post.frontmatter.date}</small>
                             </header>
                             <section>
-                                <p class="subtitle is-6"
+                                <p className="subtitle is-6"
                                 dangerouslySetInnerHTML={{
                                     __html: post.frontmatter.description || post.excerpt,
                                 }}
@@ -50,10 +48,10 @@ const Category = ( {  pageContext, data }) => {
                                 />
                             </section>
                             </article>
-                            <div class="tags are-medium">
+                            <div className="tags are-medium">
                                 {postTags.map((tag) => (
-                                    <Link to={`/tags/${kebabCase(tag)}/`}>
-                                      <span class="tag is-info is-light"># {tag}</span>
+                                    <Link to={`/tag/${kebabCase(tag)}/`}>
+                                      <span className="tag is-info is-light"># {tag}</span>
                                     </Link>
                                   )
                                 )}
@@ -66,38 +64,30 @@ const Category = ( {  pageContext, data }) => {
         </Layout>
     )
 }
-export default Category
+export default CategoryTemplate
 
 // 쿼리의 argument인 $category는 page context로 전달 받는다.
 export const pageQuery = graphql`
-  query($category: String) {
-    site {
-      siteMetadata {
+query(
+  $category: String
+) {
+  allMarkdownRemark(
+    limit: 2000
+    sort: { fields: {slug: DESC}}
+    filter: { frontmatter: { category: { eq: $category } } }
+  ){
+  nodes {
+    fields {
+      slug
+    }
+      frontmatter {
+        category
+        tags
         title
+        description
+        date(formatString: "MMMM DD, YYYY")
       }
     }
-    allMarkdownRemark(
-      limit: 2000
-      sort: { fields: {slug: DESC}}
-      filter: { frontmatter: { category: { eq: $category } } }
-    ) 
-    {
-      group(field: { frontmatter: { category: SELECT }}) {
-        totalCount
-        }
-       nodes {
-         excerpt
-          fields {
-            slug
-          }
-          frontmatter {
-            category
-            tags
-            title
-            description
-            date(formatString: "MMMM DD, YYYY")
-          }
-        }
-    }
   }
+}
 `

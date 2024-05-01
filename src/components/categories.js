@@ -6,20 +6,20 @@ const Categories = ({ categories }) => {
 
    return (
         <div>
-             <p class="menu-label">
+             <p className="menu-label">
                 categories
             </p>
-             <ul class="menu-list">
+             <ul className="menu-list">
              {categories?.map(category => (
-                     <li>
-                        <Link to={`/categories/${kebabCase(category)}/`}>
-                            { category }
-                        </Link>
-                    </li>
-                )
+                  <li>
+                    <Link to={`/categories/${kebabCase(category)}/`}>
+                        { category }
+                    </Link>
+                  </li>
+              )
              )
              }
-              {/* <a class="is-active">Manage Your Team</a> */}
+              {/* <a className="is-active">Manage Your Team</a> */}
             </ul>
         </div>
     )

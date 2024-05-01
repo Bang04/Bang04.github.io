@@ -31,6 +31,7 @@
     "react-burger-menu": "^3.0.9",
     "react-dom": "^18.1.0",
     "react-helmet": "^6.1.0",
+    "react-router-dom": "^6.23.0",
     "react-use-fusejs": "^2.0.2"
   },
   "devDependencies": {
