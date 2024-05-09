@@ -3,7 +3,6 @@ import { Link, graphql } from "gatsby"
 import { Routes, Route } from 'react-router-dom';
 import kebabCase from "lodash/kebabCase"
 import * as Classes from './index.module.css';
-import 'bulma/css/bulma.min.css';
 
 import Bio from "../components/bio"
 import Layout from "../components/layout/layout"
@@ -45,7 +44,6 @@ const BlogIndex = ({ data, location, pageContext }) => {
 
   return (
     <Layout location={location} title={siteTitle}  onChangeCat={filterCatHandler}>
-      {/* <CategoryList data ={categories}/> */}
        <Search />
         <TagList data = {tags}/>
         <div className={Classes.posts}>

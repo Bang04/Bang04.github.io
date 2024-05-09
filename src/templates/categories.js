@@ -2,28 +2,26 @@ import React from "react";
 import { Link, graphql } from "gatsby"
 import kebabCase from "lodash/kebabCase"
 import Layout from "../components/layout/layout"
-
-const CategoryTemplate = ( { pageContext, data }) => {
+import TagList from "../components/tags"
+const CategoryTemplate = ({pageContext, data }) => {
   const { category } = pageContext
-   const posts = data.allMarkdownRemark.nodes
-   //const page = JSON.parse(pageContext);
-   console.log("Categories pageContext" + typeof page);
-  // const categories = data.allMarkdownRemark.categoryList
-  console.log("Categories Template call");
+  const { nodes, totalCount } = data.allMarkdownRemark
+  const tags = data.GroupTags.group
 
+  //const { posts } = data
     return (
-        <Layout location="" title="category" >
+        <Layout title="category" >
            <section className="hero is-primary">
               <div className="hero-body">
                 <p>Category</p>
-                <p>{category}</p>
-                <p> A collection of {posts.length } post</p>
+                <p><h1>{category}</h1></p>
+                {/* <p> A collection of {posts.length } post</p> */}
               </div>
             </section>
-
+            <TagList data = {tags}/>
             <section className="section">
               <ol  style={{ listStyle: `none` }}>
-                  {posts?.map(post => {
+                  {nodes?.map(post => {
                     const title = post.frontmatter.title || post.fields.slug
                     const postTags  =  post.frontmatter.tags 
                     const category   =  post.frontmatter.category 
@@ -32,7 +30,6 @@ const CategoryTemplate = ( { pageContext, data }) => {
                             <article className="card-content">
                             <header>
                                 <div className="title">
-                                <div className="category">{category}</div>
                                 <Link to={post.fields.slug} itemProp="url">
                                     <span itemProp="headline">{title}</span>
                                 </Link>
@@ -87,6 +84,12 @@ query(
         description
         date(formatString: "MMMM DD, YYYY")
       }
+    }
+  }
+  GroupTags: allMarkdownRemark(limit: 2000) {
+    group(field: { frontmatter: { tags: SELECT }}) {
+      fieldValue
+      totalCount
     }
   }
 }

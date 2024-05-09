@@ -1,53 +1,59 @@
 import React from "react";
 import { Link, graphql } from "gatsby"
+import PropTypes from "prop-types"
 import kebabCase from "lodash/kebabCase"
 import 'bulma/css/bulma.min.css';
-const Categories = ({ categories }) => {
 
-   return (
-        <div>
-             <p className="menu-label">
-                categories
-            </p>
-             <ul className="menu-list">
-             {categories?.map(category => (
-                  <li>
-                    <Link to={`/categories/${kebabCase(category)}/`}>
-                        { category }
-                    </Link>
-                  </li>
-              )
-             )
-             }
-              {/* <a className="is-active">Manage Your Team</a> */}
-            </ul>
+const CategoryPage = ({ data }) => {
+  return (
+    <div className="dropdown is-active">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+      <div className="dropdown-trigger">
+        <button className="button" aria-haspopup="true" aria-controls="dropdown-menu">
+          <span>Categories</span>
+          <span className="icon is-small">
+            <i className="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+        </button>
+      </div>
+      <div className="dropdown-menu" id="dropdown-menu" role="menu">
+        <div className="dropdown-content">
+        {data?.map(category => (
+              <li>
+                <Link className="dropdown-item" to={`/category/${kebabCase(category.fieldValue)}/`}>
+                    { category.fieldValue }
+                </Link>
+              </li>
+            )
+          )
+        } 
         </div>
-    )
+      </div>
+    </div>
+
+  )
 }
 
-export default Categories
+CategoryPage.propTypes = {
+  data: PropTypes.shape({
+    allMarkdownRemark: PropTypes.shape({
+      group: PropTypes.arrayOf(
+        PropTypes.shape({
+          fieldValue: PropTypes.string.isRequired,
+          totalCount: PropTypes.number.isRequired,
+        }).isRequired
+      ),
+    }),
+  }),
+}
 
+export default CategoryPage
 export const pageQuery = graphql`
-  query Category {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-    allMarkdownRemark(
-      limit: 2000
-      sort: { fields: {slug: DESC}}
-    ) {
-      totalCount
-      edges {
-        node {
-          fields {
-            slug
-          }
-          frontmatter {
-            title
-          }
-        }
+  query {
+    allMarkdownRemark {
+      group(field: {frontmatter: {category: SELECT}}) {
+        fieldValue
+        totalCount
       }
     }
   }

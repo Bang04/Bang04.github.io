@@ -16,10 +16,7 @@ const _ = require(`lodash.kebabcase`)
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
-  // template
-  const blogPostTemplate = path.resolve(`src/templates/post-details.js`)
-  const tagTemplate = path.resolve("src/templates/tags.js")
-  const categoryTemplate = path.resolve("src/templates/categories.js")
+
 //  const blogListTemplate = path.resolve("./src/templates/post-list.js")
 
   const { data } = await graphql(`
@@ -59,14 +56,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-   /* Post Detaile By Slug */
+  /* Post Detaile By Slug */
   const posts = data.allMarkdownRemark.nodes
   posts.forEach((post, index) => {
     const previousPostId = index === 0 ? null : posts[index - 1].id
     const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id;
     createPage({
-      path: post.fields.slug,
-      component: blogPostTemplate,
+      path: `/posts/${post.fields.slug}`,
+      component:  path.resolve(`src/templates/post-details.js`),
       context: {
         id: post.id,
         previousPostId,
@@ -80,7 +77,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
    tags.forEach(tag => {
     createPage({
       path: `/tag/${_(tag.fieldValue)}/`,
-      component: tagTemplate,
+      component: path.resolve("src/templates/tags.js"),
       context: {
         tag: tag.fieldValue,
       },
@@ -89,11 +86,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   /* Post List By Categories */
   const categories = data.GroupCategory.group;
-  console.log("cateogory node : "+categories);
   categories.forEach(category => {
     createPage({
+      //path: `/category/${_(category.fieldValue)}/`,
       path: `/category/${_(category.fieldValue)}/`,
-      component: categoryTemplate,
+      component:  path.resolve("src/templates/categories.js"),
       context: {
         category: category.fieldValue,
       },

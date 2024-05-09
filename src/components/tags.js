@@ -1,33 +1,23 @@
 import React from "react"
+import { Link, graphql } from "gatsby"
 import PropTypes from "prop-types"
-// Utilities
 import kebabCase from "lodash/kebabCase"
 import 'bulma/css/bulma.min.css';
 
-// Components
-import { Link, graphql } from "gatsby"
-import { Helmet } from "react-helmet"
 
-const TagsPage = ({ data }) => {
-  const tags = data.group; 
-  <div>
-    {/* <Helmet title={title} /> */}
-    <div>
-      <h1>Tags</h1>
-      <ul>
-        {tags.map(tag => (
-          <li key={tag.fieldValue}>
-            <Link to={`/tag/${kebabCase(tag.fieldValue)}/`}>
-              {tag.fieldValue} ({tag.totalCount})
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+const Tags = ({ data }) => {
+  return (
+  <div class="tags are-medium">
+    {data?.map(tag => (
+        <Link className="tag is-info" to={`/tag/${kebabCase(tag.fieldValue)}/`}>
+        {tag.fieldValue} ({tag.totalCount})
+      </Link>
+    ))}
   </div>
-}
 
-TagsPage.propTypes = {
+)
+}
+Tags.propTypes = {
   data: PropTypes.shape({
     allMarkdownRemark: PropTypes.shape({
       group: PropTypes.arrayOf(
@@ -37,17 +27,12 @@ TagsPage.propTypes = {
         }).isRequired
       ),
     }),
-    site: PropTypes.shape({
-      siteMetadata: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-      }),
-    }),
   }),
 }
 
-export default TagsPage
+export default Tags
 
-export const Query = graphql`
+export const pageQuery = graphql`
   query 
   {
     allMarkdownRemark {

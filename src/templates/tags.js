@@ -7,8 +7,7 @@ const TagTemplate = ({ pageContext, data }) => {
   const { nodes, totalCount } = data.allMarkdownRemark
 
   return (
-    <Layout location={``} title="Tag">
-
+    <Layout title="Tag">
         <section className="hero is-primary ">
           <div className="hero-body">
             <p>Tag</p>

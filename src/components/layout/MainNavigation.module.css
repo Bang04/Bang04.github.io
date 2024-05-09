@@ -1,4 +1,4 @@
-.header{
+.top{
     display:flex;
     flex-direction: column;
     justify-content:center;
@@ -7,12 +7,12 @@
     /* border-bottom: 1px solid #ddd; */
     background-color: #f4f5f6;
 }
+/* 
+.top .top{  display: flex; align-items: center;} */
+.top .logo{ font-size: 2rem; font-weight: bold; color: rgb(116, 170, 245);}
 
-.header .top{  display: flex; align-items: center;}
-.header .logo{ font-size: 2rem; font-weight: bold; color: rgb(116, 170, 245);}
 
-
-.header .logoImage{
+.top .logoImage{
 
     width: 100%;
     height: auto;

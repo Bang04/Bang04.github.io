@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "gatsby"
 import kebabCase from "lodash/kebabCase"
 import 'bulma/css/bulma.min.css';
-import classes from './list.module.css';
 
 const PostList = ( {data} ) =>{
     //console.log(data);

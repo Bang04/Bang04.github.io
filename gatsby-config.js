@@ -9,7 +9,7 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `Tech-Log `,
+    title: `Miniaml Blog `,
     author: {
       name: `EunKyeong`,
       summary: `프론트 개발자를 꿈꾸며 꾸준히 공부하며 불경력을 쌓고 싶습니다 :)`,
@@ -19,7 +19,7 @@ module.exports = {
    
   },
   plugins: [
-    `gatsby-plugin-image`,
+
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -58,6 +58,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-image`,
     {
       resolve: `gatsby-plugin-feed`,
       options: {

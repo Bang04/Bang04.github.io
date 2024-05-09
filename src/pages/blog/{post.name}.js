@@ -1,55 +1,46 @@
-import React from "react";
+import * as React from "react"
 import { Link, graphql } from "gatsby"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout/layout"
 import Seo from "../components/seo"
-import Tags from "../pages/tags" 
-import * as Classes from '../templates/post-details.module.css';
+import * as classes from './post-details.module.css';
 
-const PostDtail = ({
-        data: { previous, next, site, markdownRemark: post, location = "",  
-        },
-      
-      }) => {
-      
-        const siteTitle = site.siteMetadata?.title || `Title`
-        // const categories = data.allMarkdownRemark.categoryList
-        const  tags  = post.frontmatter.tags;
-        console.log(tags);
-      
-    return(
-        <Layout location={location} title={siteTitle}>
-        {/* <Layout location={`/blog/`} title={siteTitle}></Layout> */}
-        {/* <Categoris categories ={ categories }/> */}
-  
+const BlogPostTemplate = ({
+  data: { previous, next, site, markdownRemark: post, location = "",  
+  },
+}) => {
+  const siteTitle = site.siteMetadata?.title || `Title`
+  const  tags  = post.frontmatter.tags;
+  return (
+    <Layout location={location} title={siteTitle}>
       <article
-          className={Classes.post}
+          className={classes.post}
           itemScope
           itemType="http://schema.org/Article"
         >
-          <header className={Classes.header}>
-            <div className={Classes.title}>
+          <header className={classes.header}>
+            <div className={classes.title}>
               <p>{post.frontmatter.title}</p>
             </div>
-            <div className={Classes.date}>
+            <div className={classes.date}>
               <p>{post.frontmatter.date}</p>
             </div>
 
-            <Tags tags = { tags } />
+            {/* <Tags tags = { tags } /> */}
             
           </header>
 
-          <div className={Classes.content}
+          <div className={classes.content}
             dangerouslySetInnerHTML={{ __html: post.html }}
             itemProp="articleBody"
           /> 
 
-          <footer className={Classes.footer}>
+          <footer className={classes.footer}>
             <Bio />
           </footer>
       </article>
-      <nav className={Classes.nav}>
+      <nav className={classes.nav}>
         <ul
           style={{
             display: `flex`,
@@ -76,10 +67,19 @@ const PostDtail = ({
         </ul>
       </nav>
       </Layout>
-    )
+  )
 }
 
-export default PostDtail;
+export const Head = ({ data: { markdownRemark: post } }) => {
+  return (
+    <Seo
+      title={post.frontmatter.title}
+      description={post.frontmatter.description || post.excerpt}
+    />
+  )
+}
+
+export default BlogPostTemplate
 
 export const pageQuery = graphql`
   query BlogPostBySlug(
