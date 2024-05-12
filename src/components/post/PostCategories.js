@@ -4,17 +4,11 @@ import PropTypes from "prop-types"
 import kebabCase from "lodash/kebabCase"
 import 'bulma/css/bulma.min.css';
 
-const CategoryPage = ({ data }) => {
+const PostCategories = ({ data }) => {
   return (
-    <div className="dropdown is-active">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+    <div className="leftmenu">
       <div className="dropdown-trigger">
-        <button className="button" aria-haspopup="true" aria-controls="dropdown-menu">
-          <span>Categories</span>
-          <span className="icon is-small">
-            <i className="fas fa-angle-down" aria-hidden="true"></i>
-          </span>
-        </button>
+        <span>Categories</span>
       </div>
       <div className="dropdown-menu" id="dropdown-menu" role="menu">
         <div className="dropdown-content">
@@ -34,7 +28,7 @@ const CategoryPage = ({ data }) => {
   )
 }
 
-CategoryPage.propTypes = {
+PostCategories.propTypes = {
   data: PropTypes.shape({
     allMarkdownRemark: PropTypes.shape({
       group: PropTypes.arrayOf(
@@ -47,7 +41,7 @@ CategoryPage.propTypes = {
   }),
 }
 
-export default CategoryPage
+export default PostCategories
 export const pageQuery = graphql`
   query {
     allMarkdownRemark {

@@ -1,50 +1,24 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
-import Layout from "../components/layout/layout"
+import Layout from "../components/layout/Layout"
+import PostList from "../components/post/PostList"
 
 const TagTemplate = ({ pageContext, data }) => {
   const { tag } = pageContext
   const { nodes, totalCount } = data.allMarkdownRemark
 
   return (
-    <Layout title="Tag">
+    <Layout title="Tag"  location={ `/`}>
+      
         <section className="hero is-primary ">
           <div className="hero-body">
             <p>Tag</p>
-            <p>{tag}</p>
-            <p> A collection of {totalCount } post  </p>
+            <p className="title">{tag}</p>
+            <p className="subtitle">A collection of {totalCount } post </p>
           </div>
         </section>
         <section className="section">
-          <ol  style={{ listStyle: `none` }}>
-          {nodes?.map( post => {
-              const title = post.frontmatter.title
-              const slug = post.fields.slug
-              return (
-                // <PostsList posts={posts} />
-                <li className="card" key={slug}>
-                  <article className="card-content">
-                    <header>
-                      <div className="title">
-                        <Link to={slug} itemProp="url">
-                          <span itemProp="headline">{title}</span>
-                        </Link>
-                      </div>
-                      <small>{post.frontmatter.date}</small>
-                    </header>
-                    <section>
-                      <p className="subtitle is-6"
-                        dangerouslySetInnerHTML={{
-                          __html: post.frontmatter.description || post.excerpt,
-                        }}
-                        itemProp="description"
-                      />
-                    </section>
-                  </article>
-                </li>
-              )
-          })}
-          </ol>
+         <PostList data = { data }/>
         </section>
     </Layout>
   )

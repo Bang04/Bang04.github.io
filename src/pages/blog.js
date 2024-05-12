@@ -1,17 +1,15 @@
 import React , { useState } from "react"
 import { Link, graphql } from "gatsby"
-import { Routes, Route } from 'react-router-dom';
 import kebabCase from "lodash/kebabCase"
-import * as Classes from './index.module.css';
-
-import Bio from "../components/bio"
-import Layout from "../components/layout/layout"
-import Seo from "../components/seo"
-
-// Component
-import Search from "../components/search"
-import TagList from "../components/tags"
-import CategoryList from "../components/categories";
+import Layout from "../components/layout/Layout"
+import Bio from "../components/layout/Bio"
+import Seo from "../components/layout/Seo"
+import Search from "../components/post/PostSearch"
+import TagList from "../components/post/PostTags"
+import CategoryList from "../components/post/PostCategories";
+import PostList from "../components/post/PostList"
+import * as classes from './index.module.css';
+import 'bulma/css/bulma.min.css';
 
 
 const BlogIndex = ({ data, location, pageContext }) => {
@@ -44,9 +42,11 @@ const BlogIndex = ({ data, location, pageContext }) => {
 
   return (
     <Layout location={location} title={siteTitle}  onChangeCat={filterCatHandler}>
+      {/* <CategoryList data ={categories}/> */}
        <Search />
         <TagList data = {tags}/>
-        <div className={Classes.posts}>
+        <PostList data={data} lo/>
+        {/* <div className={classes.posts}>
             <ol  style={{ listStyle: `none` }}>
               {posts.map(post => {
                 const title = post.frontmatter.title || post.fields.slug
@@ -57,12 +57,12 @@ const BlogIndex = ({ data, location, pageContext }) => {
                     <article class="card-content">
                       <header>
                         <div class="title">
-                          <Link to={post.fields.slug} itemProp="url">
+                          <Link to={`/posts/${kebabCase(post.fields.slug)}/`} itemProp="url">
                             <span itemProp="headline">{title}</span>
                           </Link>
                         </div>
-                      
                       </header>
+
                       <section>
                         <p class="subtitle is-6"
                           dangerouslySetInnerHTML={{
@@ -88,7 +88,7 @@ const BlogIndex = ({ data, location, pageContext }) => {
                 )
               })}
             </ol>
-        </div>
+        </div> */}
     </Layout>
   )
 }

@@ -3,21 +3,23 @@ import { Link, graphql } from "gatsby"
 import PropTypes from "prop-types"
 import kebabCase from "lodash/kebabCase"
 import 'bulma/css/bulma.min.css';
+import * as classes from './PostTags.module.css';
 
 
-const Tags = ({ data }) => {
+const PostTags = ({ data }) => {
   return (
-  <div class="tags are-medium">
-    {data?.map(tag => (
-        <Link className="tag is-info" to={`/tag/${kebabCase(tag.fieldValue)}/`}>
-        {tag.fieldValue} ({tag.totalCount})
-      </Link>
-    ))}
-  </div>
-
-)
+    <div className={classes.tags}>    
+      <div className="tags are-medium">
+        {data?.map(( tag, index ) => (
+            <Link key={ index } className="tag is-info" to={`/tag/${kebabCase(tag.fieldValue)}/`}>
+            {tag.fieldValue} ({tag.totalCount})
+          </Link>
+        ))}
+      </div>
+    </div>
+  )
 }
-Tags.propTypes = {
+PostTags.propTypes = {
   data: PropTypes.shape({
     allMarkdownRemark: PropTypes.shape({
       group: PropTypes.arrayOf(
@@ -30,7 +32,7 @@ Tags.propTypes = {
   }),
 }
 
-export default Tags
+export default PostTags
 
 export const pageQuery = graphql`
   query 

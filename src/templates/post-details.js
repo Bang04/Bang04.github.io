@@ -1,56 +1,43 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
-
-import Bio from "../components/bio"
-import Layout from "../components/layout/layout"
-import Seo from "../components/seo"
-import * as Classes from './post-details.module.css';
+import Bio from "../components/layout/Bio"
+import Seo from "../components/layout/Seo"
+import Layout from "../components/layout/Layout"
+import * as classes from './post-details.module.css';
 
 const BlogPostTemplate = ({
   data: { previous, next, site, markdownRemark: post, location = "",  
   },
-
 }) => {
-
   const siteTitle = site.siteMetadata?.title || `Title`
-  // const categories = data.allMarkdownRemark.categoryList
   const  tags  = post.frontmatter.tags;
-  console.log("BlogPostTemplate call");
-
-  // const { tag } = pageContext 
 
   return (
     <Layout location={location} title={siteTitle}>
-        {/* <Layout location={`/blog/`} title={siteTitle}></Layout> */}
-        {/* <Categoris categories ={ categories }/> */}
-  
       <article
-          className={Classes.post}
+          className={classes.post}
           itemScope
           itemType="http://schema.org/Article"
         >
-          <header className={Classes.header}>
-            <div className={Classes.title}>
+          <header className={classes.header}>
+            <div className={classes.title}>
               <p>{post.frontmatter.title}</p>
             </div>
-            <div className={Classes.date}>
+            <div className={classes.date}>
               <p>{post.frontmatter.date}</p>
             </div>
-
-            {/* <Tags tags = { tags } /> */}
-            
           </header>
 
-          <div className={Classes.content}
+          <div className={classes.content}
             dangerouslySetInnerHTML={{ __html: post.html }}
             itemProp="articleBody"
           /> 
 
-          <footer className={Classes.footer}>
-            <Bio />
+          <footer className={classes.footer}>
+        
           </footer>
       </article>
-      <nav className={Classes.nav}>
+      <nav className={classes.nav}>
         <ul
           style={{
             display: `flex`,

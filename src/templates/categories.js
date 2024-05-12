@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, graphql } from "gatsby"
 import kebabCase from "lodash/kebabCase"
-import Layout from "../components/layout/layout"
-import TagList from "../components/tags"
+import Layout from "../components/layout/Layout"
+import TagList from "../components/post/PostTags"
 const CategoryTemplate = ({pageContext, data }) => {
   const { category } = pageContext
   const { nodes, totalCount } = data.allMarkdownRemark

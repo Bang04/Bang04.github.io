@@ -1,6 +1,7 @@
 import * as React from "react"
+import 'bulma/css/bulma.min.css';
 
-const footer = () => {
+const Footer = () => {
     return (
       <footer className="footer">
         © {new Date().getFullYear()}, Built with
@@ -9,4 +10,4 @@ const footer = () => {
       </footer>
     )
 }
-export default footer
+export default Footer

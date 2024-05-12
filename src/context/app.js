@@ -11,9 +11,7 @@ export const AppProvider = ({ children }) => {
 
   return (
     <AppContext.Provider value={{ fusejs, setFusejs }}>
-      <BrowserRouter>
-      {children}
-      </BrowserRouter>
+       {children}
     </AppContext.Provider>
   )
 }

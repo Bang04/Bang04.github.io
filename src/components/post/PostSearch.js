@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { Link, useStaticQuery, graphql } from 'gatsby'
 import { useGatsbyPluginFusejs } from 'react-use-fusejs'
-import * as Classes from './search.module.css';
+import * as classes from './PostSearch.module.css';
 
-export function Search() {
+export function PostSearch() {
   const data = useStaticQuery(graphql`
     {
       fusejs {
@@ -18,7 +18,7 @@ export function Search() {
   const result = useGatsbyPluginFusejs(query, data.fusejs)
 
   return (
-    <div className={Classes.search}>
+    <div className={classes.search}>
       <input
         type="text"
         value={query}
@@ -26,10 +26,10 @@ export function Search() {
         className='input is-info is-normal'
         placeholder="Text input"
       />
-      <ul className={Classes.result}>
+      <ul className={classes.result}>
         {result.map(({ item }) => (
           <li key={item.id}>
-            <Link to={item.slug } itemProp="url">
+            <Link to={`/posts/`+item.slug } itemProp="url">
               {item.title}
             </Link>
           </li>
@@ -39,4 +39,4 @@ export function Search() {
   )
 }
 
-export default Search
+export default PostSearch

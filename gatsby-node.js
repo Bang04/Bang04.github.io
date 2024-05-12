@@ -8,17 +8,12 @@
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 const _ = require(`lodash.kebabcase`)
-//const { post } = require('jquery')
 
 /**
  * @type {import('gatsby').GatsbyNode['createPages']}
  */
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
-
-
-//  const blogListTemplate = path.resolve("./src/templates/post-list.js")
-
   const { data } = await graphql(`
     {
       allMarkdownRemark(
@@ -62,7 +57,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     const previousPostId = index === 0 ? null : posts[index - 1].id
     const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id;
     createPage({
-      path: `/posts/${post.fields.slug}`,
+      path: `/posts/${_(post.fields.slug)}/`,
       component:  path.resolve(`src/templates/post-details.js`),
       context: {
         id: post.id,

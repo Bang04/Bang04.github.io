@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Link  } from "gatsby"
-import $ from "jquery";
 import 'bulma/css/bulma.min.css';
 import logoImg from "../../images/pubao_pro.png"
 
 function MainNavigation() {
 
   const [isOpen , setIsopen ] = useState(false);
+  //console.log("isOpen : "+isOpen);
   const toggleMenu = () => {
     setIsopen(isOpen => !isOpen);
-    console.log("isPoen : "+ isOpen);
+    //console.log("isPoen : "+ isOpen);
   }
 
 
@@ -26,14 +26,13 @@ function MainNavigation() {
           </div>
 
           <div onClick={() => toggleMenu()} 
-          class= { isOpen? "navbar-burger" : "navbar-burger is-active"} >
-            <span aria-hidden="true"></span>
+          className= { isOpen? "navbar-burger is-active" : "navbar-burger" } >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </div>
         </div>
-        <div className= { isOpen? "navbar-menu" : "navbar-menu is-active" }>
+        <div className= { isOpen? "navbar-menu is-active" :  "navbar-menu"  }>
           <div className="navbar-start">
             <Link className='navbar-item' href='/about'>About</Link>
             <Link className='navbar-item' href='/blog'>Blog</Link>
