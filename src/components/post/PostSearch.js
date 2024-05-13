@@ -24,7 +24,7 @@ export function PostSearch() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         className='input is-info is-normal'
-        placeholder="Text input"
+        placeholder="검색어를 입력하세요"
       />
       <ul className={classes.result}>
         {result.map(({ item }) => (

@@ -2,7 +2,7 @@ import * as React from "react"
 import { Link, graphql } from "gatsby"
 import Layout from "../components/layout/Layout"
 import PostList from "../components/post/PostList"
-
+import PostTags from "../components/post/PostTags"
 const TagTemplate = ({ pageContext, data }) => {
   const { tag } = pageContext
   const { nodes, totalCount } = data.allMarkdownRemark
@@ -12,11 +12,12 @@ const TagTemplate = ({ pageContext, data }) => {
       
         <section className="hero is-primary ">
           <div className="hero-body">
-            <p>Tag</p>
+            <p>Tag TagTemplate</p>
             <p className="title">{tag}</p>
             <p className="subtitle">A collection of {totalCount } post </p>
           </div>
         </section>
+        <PostTags />
         <section className="section">
          <PostList data = { data }/>
         </section>

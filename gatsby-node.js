@@ -35,11 +35,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           fieldValue
         }
       }
-      GroupCategory :allMarkdownRemark(limit: 2000)  {
-        group(field: {frontmatter: {category: SELECT}}){
-          fieldValue
-        }
-      } 
     }
   `)
 
@@ -57,7 +52,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     const previousPostId = index === 0 ? null : posts[index - 1].id
     const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id;
     createPage({
-      path: `/posts/${_(post.fields.slug)}/`,
+      path: `/posts${_(post.fields.slug)}/`,
       component:  path.resolve(`src/templates/post-details.js`),
       context: {
         id: post.id,
@@ -67,30 +62,17 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     })
   })
 
-  /* Post List By Tag */
+  /* Tags */
   const tags = data.GroupTags.group;
    tags.forEach(tag => {
     createPage({
-      path: `/tag/${_(tag.fieldValue)}/`,
+      path: `/tags/${_(tag.fieldValue)}/`,
       component: path.resolve("src/templates/tags.js"),
       context: {
         tag: tag.fieldValue,
       },
     })
   });
-
-  /* Post List By Categories */
-  const categories = data.GroupCategory.group;
-  categories.forEach(category => {
-    createPage({
-      //path: `/category/${_(category.fieldValue)}/`,
-      path: `/category/${_(category.fieldValue)}/`,
-      component:  path.resolve("src/templates/categories.js"),
-      context: {
-        category: category.fieldValue,
-      },
-    })
-  })
 }
 
 /**

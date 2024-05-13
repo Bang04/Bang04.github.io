@@ -6,10 +6,8 @@ import logoImg from "../../images/pubao_pro.png"
 function MainNavigation() {
 
   const [isOpen , setIsopen ] = useState(false);
-  //console.log("isOpen : "+isOpen);
   const toggleMenu = () => {
     setIsopen(isOpen => !isOpen);
-    //console.log("isPoen : "+ isOpen);
   }
 
 

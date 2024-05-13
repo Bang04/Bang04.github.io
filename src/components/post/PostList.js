@@ -1,11 +1,14 @@
-import React , { useState } from "react"
+import React , { useState, useContext } from "react"
 import { Link, graphql } from "gatsby"
 import kebabCase from "lodash/kebabCase"
 import 'bulma/css/bulma.min.css';
 
-const PostList = ({ data }) => {
-
+const PostList = ({ data , onChangeCat }) => {
+ 
   const {nodes , totalCount}  = data.allMarkdownRemark
+  const clickHandler = event => {
+    onChangeCat(event.target.innerText)
+  }
 
   return (
     <div className="card">
@@ -18,7 +21,7 @@ const PostList = ({ data }) => {
                 <article className="card-content">
                   <header>
                     <div className="title">
-                      <Link to={`/posts/`+post.fields.slug} itemProp="url">
+                       <Link to={`/posts/${kebabCase(post.fields.slug)}/`} itemProp="url">
                         <span itemProp="headline">{title}</span>
                       </Link>
                     </div>
@@ -57,16 +60,10 @@ const PostList = ({ data }) => {
 export default PostList
 
 export const pageQuery = graphql`
-query {
+query($tag: String ){
     site {
       siteMetadata {
         title
-      }
-    }
-    GroupCategory :allMarkdownRemark(limit: 2000)  {
-      group(field: {frontmatter: {category: SELECT}}){
-        fieldValue
-        totalCount
       }
     }
     GroupTags: allMarkdownRemark(limit: 2000) {
@@ -75,7 +72,10 @@ query {
         totalCount
       }
     }
-    allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
+    allMarkdownRemark(
+      sort: {frontmatter: {date: DESC}}
+      filter: {frontmatter: {tags: {in: [$tag]}}}
+    ) {
       totalCount
       nodes {
         excerpt

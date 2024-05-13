@@ -6,7 +6,6 @@ import Bio from "../components/layout/Bio"
 import Seo from "../components/layout/Seo"
 import Search from "../components/post/PostSearch"
 import TagList from "../components/post/PostTags"
-import CategoryList from "../components/post/PostCategories";
 import PostList from "../components/post/PostList"
 import * as classes from './index.module.css';
 import 'bulma/css/bulma.min.css';
@@ -17,7 +16,6 @@ const BlogIndex = ({ data, location, pageContext }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const {nodes , totalCount}  = data.allMarkdownRemark
   const posts = nodes
-  const categories = data.GroupCategory.group
   const tags = data.GroupTags.group
 
 
@@ -42,10 +40,9 @@ const BlogIndex = ({ data, location, pageContext }) => {
 
   return (
     <Layout location={location} title={siteTitle}  onChangeCat={filterCatHandler}>
-      {/* <CategoryList data ={categories}/> */}
        <Search />
         <TagList data = {tags}/>
-        <PostList data={data} lo/>
+        <PostList data={data} />
         {/* <div className={classes.posts}>
             <ol  style={{ listStyle: `none` }}>
               {posts.map(post => {
@@ -103,12 +100,6 @@ query {
     site {
       siteMetadata {
         title
-      }
-    }
-    GroupCategory :allMarkdownRemark(limit: 2000)  {
-      group(field: {frontmatter: {category: SELECT}}){
-        fieldValue
-        totalCount
       }
     }
     GroupTags: allMarkdownRemark(limit: 2000) {
