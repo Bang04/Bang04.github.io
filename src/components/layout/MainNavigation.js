@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link  } from "gatsby"
 import 'bulma/css/bulma.min.css';
 import logoImg from "../../images/pubao_pro.png"
+import * as classes from "./MainNavigation.module.css"
 
 function MainNavigation() {
 
@@ -14,17 +15,15 @@ function MainNavigation() {
   return (
      <nav className="navbar">
         <div className="navbar-brand">
-          <div className='navbar-item'>
-            <Link href='/'>
-              <figure className="image is-32x32">
-                <img className="is-rounded" src = {logoImg}/>
-              </figure>
-              <div className='text'>TechLog</div>
-            </Link>
-          </div>
+          <Link href='/'>
+            <div className={classes.logo}>
+              <img className={classes.logoImage} src = {logoImg}/>
+              <div className={classes.txt}>TechLog</div>
+            </div>
+            
+          </Link>
 
-          <div onClick={() => toggleMenu()} 
-          className= { isOpen? "navbar-burger is-active" : "navbar-burger" } >
+          <div onClick={() => toggleMenu()} className= { isOpen? "navbar-burger is-active" : "navbar-burger" } >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
