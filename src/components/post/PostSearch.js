@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { Link, useStaticQuery, graphql } from 'gatsby'
 import { useGatsbyPluginFusejs } from 'react-use-fusejs'
+import kebabCase from "lodash/kebabCase"
+
 import * as classes from './PostSearch.module.css';
 
 export function PostSearch() {
@@ -29,7 +31,7 @@ export function PostSearch() {
       <ul className={classes.result}>
         {result.map(({ item }) => (
           <li key={item.id}>
-            <Link to={`/posts/`+item.slug } itemProp="url">
+              <Link to={`/posts/${kebabCase(item.slug)}/`} itemProp="url">
               {item.title}
             </Link>
           </li>

@@ -6,7 +6,10 @@ function about ({location , data}) {
 
     return (
         <Layout location={location} title={siteTitle} >
-            <h1> About 페이지 입니다. </h1>
+             <main>
+
+                <h1> About 페이지 입니다. </h1>
+             </main>
         </Layout>
     )
 }

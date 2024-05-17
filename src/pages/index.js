@@ -3,8 +3,6 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout/Layout"
 import Bio from "../components/layout/Bio"
 import Seo from "../components/layout/Seo"
-import Search from "../components/post/PostSearch"
-import PostTags from "../components/post/PostTags"
 import PostList from "../components/post/PostList"
 import * as classes from './index.module.css';
 import 'bulma/css/bulma.min.css';
@@ -36,10 +34,8 @@ const BlogIndex = ({ data, location, pageContext }) => {
   // }
 
   return (
-    <Layout location={location} title={siteTitle} onChangeCat={filterCatHandler} >
-      <Search />
-      <PostTags data = { tags }  currentTag = {currentTag}/>
-      <PostList data = { data }  tag = {currentTag}/>
+    <Layout location={location} title={siteTitle} onChangeCat={filterCatHandler} >    
+      <PostList data = { data }  tags = {tags}/>
     </Layout>
   )
 }

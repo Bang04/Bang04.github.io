@@ -21,16 +21,21 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         limit: 1000
       ) {
         nodes {
-          id
+          excerpt
           fields {
             slug
           }
           frontmatter {
+            category
             tags
+            title
+            description
+            date(formatString: "MMMM DD, YYYY")
+           
           }
         }
       }
-      GroupTags: allMarkdownRemark(limit: 2000) {
+      tagsGroup: allMarkdownRemark(limit: 2000) {
         group(field: { frontmatter: { tags: SELECT }}) {
           fieldValue
         }
@@ -52,7 +57,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     const previousPostId = index === 0 ? null : posts[index - 1].id
     const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id;
     createPage({
-      path: `/posts${_(post.fields.slug)}/`,
+      path: `/posts/${_(post.fields.slug)}/`,
       component:  path.resolve(`src/templates/post-details.js`),
       context: {
         id: post.id,
@@ -63,7 +68,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   })
 
   /* Tags */
-  const tags = data.GroupTags.group;
+  const tags = data.tagsGroup.group;
    tags.forEach(tag => {
     createPage({
       path: `/tags/${_(tag.fieldValue)}/`,

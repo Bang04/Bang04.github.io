@@ -1,28 +1,29 @@
-import * as React from "react"
-import { Link, graphql } from "gatsby"
+import React from "react"
+import { graphql } from "gatsby"
 import Layout from "../components/layout/Layout"
 import PostList from "../components/post/PostList"
-import PostTags from "../components/post/PostTags"
-const TagTemplate = ({ pageContext, data }) => {
+
+const TagTemplate = ({ data, pageContext   }) => {
   const { tag } = pageContext
+  console.log("pageContext : "+tag);
+  const tags = data.tagsGroup.group
   const { nodes, totalCount } = data.allMarkdownRemark
 
   return (
     <Layout title="Tag"  location={ `/`}>
-        <section className="hero is-primary ">
-          <div className="hero-body">
-            <p>Tag</p>
-            <p className="title">{tag}</p>
-            <p className="subtitle">A collection of {totalCount } post </p>
-          </div>
-        </section>
-        <section className="section">
-         <PostList data = { data }/>
-        </section>
+        <main className="main">
+          {/* <div className="hero is-small is-info ">
+            <div className="hero-body">
+              <p>Tag</p>
+              <p className="title">{tag}</p>
+              <p className="subtitle">A collection of {totalCount } post </p>
+            </div>
+          </div> */}
+          <PostList data = { data } tags = {tags}/>
+        </main>
     </Layout>
   )
 }
-
 
 export default TagTemplate
 
@@ -30,6 +31,12 @@ export const pageQuery = graphql`
 query (
   $tag: String
 ) {
+  tagsGroup: allMarkdownRemark(limit: 2000) {
+    group(field: { frontmatter: { tags: SELECT }}) {
+      fieldValue
+      totalCount
+    }
+  }
   allMarkdownRemark(
      limit: 2000
       sort: { frontmatter: { date: DESC }}

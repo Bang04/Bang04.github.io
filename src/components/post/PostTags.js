@@ -9,23 +9,24 @@ import * as classes from './PostTags.module.css';
 
 
 const PostTags = ({ data }) => {
+  
   const clickHandle = (tag) => {
     //setCureentTag(tag);
   }
   return (
-    <>
-      <div className={classes.tags}>    
-        <div className="tags are-medium">
-          <Link className="tag is-info is-light"  to="/tags">All</Link>
-          {data?.map(( tag, index ) => (
-               <Link key={ index } className="tag is-info is-light" to={`/tags/${kebabCase(tag.fieldValue)}/`}> 
-                {tag.fieldValue}
-              </Link>
-          ))}
-          
-        </div>
+    <div className={classes.tags}>
+      <div className="tags are-medium">
+        {data?.map(( tag, index ) => (
+            <Link 
+                key={ index } 
+                className="tag is-info is-light" 
+                to={`/tags/${kebabCase(tag.fieldValue)}/`}
+            > 
+              {tag.fieldValue}
+            </Link>
+        ))}
       </div>
-      </>
+    </div>
   )
 }
 PostTags.propTypes = {
@@ -49,27 +50,27 @@ PostTags.propTypes = {
 
 export default PostTags
 
- export const pageQuery = graphql`
-query($tag: String) {
-  allMarkdownRemark(
-    limit: 2000
-    sort: { frontmatter: { date: DESC }}
-    filter: { frontmatter: { tags: { in: [$tag] } } }
-  ) {
-    totalCount
-    edges {
-      node {
-        fields {
-          slug
-        }
-        frontmatter {
-          title
-        }
-      }
-    }
-  }
-}
-`
+//  export const pageQuery = graphql`
+//   query($tag: String) {
+//     allMarkdownRemark(
+//       limit: 2000
+//       sort: { frontmatter: { date: DESC }}
+//       filter: { frontmatter: { tags: { in: [$tag] } } }
+//     ) {
+//       totalCount
+//       edges {
+//         node {
+//           fields {
+//             slug
+//           }
+//           frontmatter {
+//             title
+//           }
+//         }
+//       }
+//     }
+//   }
+//   `
 //   query 
 //   {
 //     site {

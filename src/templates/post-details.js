@@ -9,6 +9,7 @@ const BlogPostTemplate = ({
   data: { previous, next, site, markdownRemark: post, location = "",  
   },
 }) => {
+  console.log(typeof previous );
   const siteTitle = site.siteMetadata?.title || `Title`
   const  tags  = post.frontmatter.tags;
 
