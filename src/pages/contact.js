@@ -6,7 +6,7 @@ function Conteact({data, location, pageContext}){
 
     return(
         <Layout location={location} title={siteTitle}>
-            <form method="post" action="#">
+            <form method="post"action="https://getform.io/{your-unique-getform-endpoint}">
                 <div className="card">
                     <div class="field">
                         <label class="label">Name</label>

@@ -26,6 +26,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             slug
           }
           frontmatter {
+            slug
             category
             tags
             title
@@ -53,19 +54,41 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   /* Post Detaile By Slug */
   const posts = data.allMarkdownRemark.nodes
-  posts.forEach((post, index) => {
-    const previousPostId = index === 0 ? null : posts[index - 1].id
-    const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id;
-    createPage({
-      path: `/posts/${_(post.fields.slug)}/`,
-      component:  path.resolve(`src/templates/post-details.js`),
-      context: {
-        id: post.id,
-        previousPostId,
-        nextPostId,
-      },
+  console.log("posts count : "+posts.length);
+  if (posts.length > 0) {
+    posts.forEach((post, index) => {
+      const previousPostSlug = index === 0 ? null : posts[index - 1].slug
+      const nextPostSlug =
+        index === posts.length - 1 ? null : posts[index + 1].slug
+        
+      createPage({
+        path: `/posts/${_(post.fields.slug)}/`,
+        component:  path.resolve(`src/templates/post-details.js`),
+        context: {
+          // id: post.id,
+          slug: post.fields.slug,
+          previousPostSlug,
+          nextPostSlug,
+        },
+      })
     })
-  })
+  }
+
+
+  // posts.forEach((post, index) => {
+  //   const previousPostId = index === 0 ? null : posts[index - 1].id
+  //   const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id;
+  //   createPage({
+  //     path: `/posts/${_(post.fields.slug)}/`,
+  //     component:  path.resolve(`src/templates/post-details.js`),
+  //     context: {
+  //       // id: post.id,
+  //       slug: post.slug,
+  //       previousPostId,
+  //       nextPostId,
+  //     },
+  //   })
+  // })
 
   /* Tags */
   const tags = data.tagsGroup.group;

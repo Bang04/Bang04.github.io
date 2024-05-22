@@ -1,5 +1,5 @@
 ---
-slug: "/blog/java-infomation-post2"
+slug: "java-infomation-post2"
 title: New Beginnings
 date: "2024-01-03T22:40:32.169Z"
 description: This is a custom description for SEO and Open Graph purposes, rather than the default generated excerpt. Simply add a description field to the frontmatter.

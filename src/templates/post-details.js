@@ -6,15 +6,13 @@ import Layout from "../components/layout/Layout"
 import * as classes from './post-details.module.css';
 
 const BlogPostTemplate = ({
-  data: { previous, next, site, markdownRemark: post, location = "",  
-  },
+ data: {  previous, next, site, markdownRemark: post, location = "",  
+},
 }) => {
-  console.log(typeof previous );
   const siteTitle = site.siteMetadata?.title || `Title`
-  const  tags  = post.frontmatter.tags;
-
+  
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout location="/" title={siteTitle}>
       <article
           className={classes.post}
           itemScope
@@ -81,16 +79,16 @@ export default BlogPostTemplate
 
 export const pageQuery = graphql`
   query BlogPostBySlug(
-    $id: String!
-    $previousPostId: String
-    $nextPostId: String
+    $slug: String!
+    $previousPostSlug: String
+    $nextPostSlug: String
   ) {
     site {
       siteMetadata {
         title
       }
     }
-    markdownRemark(id: { eq: $id }) {
+    markdownRemark( fields: {slug: {eq: $slug}}) {
       id
       excerpt(pruneLength: 160)
       html
@@ -101,7 +99,7 @@ export const pageQuery = graphql`
         tags
       }
     }
-    previous: markdownRemark(id: { eq: $previousPostId }) {
+    previous: markdownRemark(fields: {slug: { eq: $previousPostSlug }}) {
       fields {
         slug
       }
@@ -109,7 +107,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    next: markdownRemark(id: { eq: $nextPostId }) {
+    next: markdownRemark(fields: {slug: { eq: $nextPostSlug }}) {
       fields {
         slug
       }
@@ -119,3 +117,44 @@ export const pageQuery = graphql`
     }
   }
 `
+
+// export const pageQuery = graphql`
+//   query BlogPostBySlug(
+//     $id: String!
+//     $previousPostId: String
+//     $nextPostId: String
+//   ) {
+//     site {
+//       siteMetadata {
+//         title
+//       }
+//     }
+//     markdownRemark(id: { eq: $id }) {
+//       id
+//       excerpt(pruneLength: 160)
+//       html
+//       frontmatter {
+//         title
+//         date(formatString: "MMMM DD, YYYY")
+//         description
+//         tags
+//       }
+//     }
+//     previous: markdownRemark(id: { eq: $previousPostId }) {
+//       fields {
+//         slug
+//       }
+//       frontmatter {
+//         title
+//       }
+//     }
+//     next: markdownRemark(id: { eq: $nextPostId }) {
+//       fields {
+//         slug
+//       }
+//       frontmatter {
+//         title
+//       }
+//     }
+//   }
+// `
