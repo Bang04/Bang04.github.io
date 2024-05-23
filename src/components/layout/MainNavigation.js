@@ -32,9 +32,9 @@ function MainNavigation() {
 
         <div className= { isOpen? "navbar-menu is-active" :  "navbar-menu"  }>
           <div className="navbar-start">
-            <Link className='navbar-item' href='/about'>About</Link>
             <Link className='navbar-item' href='/'>Blog</Link>
-            <Link className='navbar-item' href='/contact'>Contact</Link> 
+            {/* <Link className='navbar-item' href='/about'>About</Link>
+            <Link className='navbar-item' href='/contact'>Contact</Link>  */}
           </div>
         </div>
       </nav>
