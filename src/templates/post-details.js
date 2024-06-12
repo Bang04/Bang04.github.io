@@ -4,13 +4,16 @@ import Bio from "../components/layout/Bio"
 import Seo from "../components/layout/Seo"
 import Layout from "../components/layout/Layout"
 import * as classes from './post-details.module.css';
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
+
 
 const BlogPostTemplate = ({
  data: {  previous, next, site, markdownRemark: post, location = "",  
 },
 }) => {
   const siteTitle = site.siteMetadata?.title || `Title`
-  
+  let featuredImg = getImage(post.frontmatter.featuredImage?.childImageSharp?.gatsbyImageData)
+
   return (
     <Layout location="/" title={siteTitle}>
       <article
@@ -27,6 +30,7 @@ const BlogPostTemplate = ({
             </div>
           </header>
 
+          <GatsbyImage image={featuredImg} />
           <div className={classes.content}
             dangerouslySetInnerHTML={{ __html: post.html }}
             itemProp="articleBody"
@@ -97,6 +101,11 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         description
         tags
+        featuredImage {
+          childImageSharp {
+            gatsbyImageData(width: 800)
+          }
+        }
       }
     }
     previous: markdownRemark(fields: {slug: { eq: $previousPostSlug }}) {
