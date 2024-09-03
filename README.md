@@ -9,20 +9,6 @@
 </h1>
 
 gatsby 로 만든 블로그입니다. 
-
-
-## 🚀 기능설명 
-
-1.  **Create a Gatsby site.**
-
-   
-
-1.  **Start developing.**
-
-   
-
-1.  **Open the source code and start editing!**
-
     
 
 ## 🧐 구조설명 
@@ -41,9 +27,7 @@ A quick look at the top-level files and directories you'll see in a typical Gats
     ├── package.json
     └── README.md
 
-## 🎓 후기
 
-정말 어려웠습니다. 
 
 ## 💫 Deploy
 
