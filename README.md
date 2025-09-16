@@ -1,15 +1,8 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
-<p align="center">
-  <a href="https://www.gatsbyjs.com">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby 기반의 블로그
-</h1>
+## 🚀 Gatsby 기반 기술 블로그
 
-gatsby 로 만든 블로그입니다. 
-    
+이 프로젝트는 Gatsby를 기반으로 한 기술 블로그입니다. <br/>
+Markdown 파일(.md, .mdx)을 추가하면 자동으로 빌드되어 블로그에 게시되며,<br/>
+카테고리(Category) 와 태그(Tag) 기능을 통해 게시글을 체계적으로 분류할 수 있습니다.<br/>
 
 ## 🧐 구조설명 
 
@@ -38,5 +31,3 @@ gatsby 로 만든 블로그입니다.
 ## 💫 Deploy
 
 Github 배포하였습니다. 
-
-<!-- AUTO-GENERATED-CONTENT:END -->
