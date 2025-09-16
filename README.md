@@ -1,8 +1,10 @@
 ## 🚀 Gatsby 기반 기술 블로그
 
-이 프로젝트는 Gatsby를 기반으로 한 기술 블로그입니다. <br/>
-Markdown 파일(.md, .mdx)을 추가하면 자동으로 빌드되어 블로그에 게시되며,<br/>
+이 프로젝트는 Gatsby를 기반의 기술 블로그입니다. <br/>
+Markdown 파일(.md, .mdx)을 추가하면 블로그에 게시되며,<br/>
 카테고리(Category) 와 태그(Tag) 기능을 통해 게시글을 체계적으로 분류할 수 있습니다.<br/>
+
+
 
 ## 🧐 구조설명 
 
@@ -18,6 +20,8 @@ Markdown 파일(.md, .mdx)을 추가하면 자동으로 빌드되어 블로그�
     ├── LICENSE
     ├── package.json
     └── README.md
+
+
     
 ## ✨ 주요 기능
 
