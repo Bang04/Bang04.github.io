@@ -25,7 +25,14 @@ gatsby 로 만든 블로그입니다.
     ├── LICENSE
     ├── package.json
     └── README.md
+    
+## ✨ 주요 기능
 
+Markdown 기반 작성 : 단순히 content/posts 폴더에 마크다운 파일을 추가하면 자동 반영
+카테고리 정리 : 글의 카테고리별 목록 제공
+태그 분류 : 글에 여러 태그를 지정 가능, 태그별 모아보기 지원
+검색  : 제목을 기준으로 검색하여 원하는 글을 빠르게 찾을 수 있음
+자동 빌드 & 배포 : GitHub Page 연동하여 CI/CD 가능
 
 
 ## 💫 Deploy
